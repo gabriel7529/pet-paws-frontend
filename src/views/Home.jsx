@@ -7,7 +7,7 @@ function Home() {
 
   return (
       <section>
-          <h2>{t("helloWorld")}</h2>
+          <h2 className="text-3xl font-bold underline">{t("helloWorld")}</h2>
           <hr/>
           <p>{t("comingSoon")}</p>
       </section>
