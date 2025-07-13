@@ -11,7 +11,8 @@
     "prettier": "prettier --write --ignore-unknown",
     "preview": "vite preview",
     "prepare": "husky",
-    "create-hook": "husky add .husky/pre-commit \"npm test\""
+    "create-hook": "husky add .husky/pre-commit \"npm test\"",
+    "api": "json-server --watch db.json --routes apiRoutes.json --port 8080"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
@@ -40,8 +41,9 @@
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "tailwindcss": "^3.4.13",
-    "postcss": "^8.4.47",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "json-server": "0.17.4",
+    "postcss": "^8.4.47"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
