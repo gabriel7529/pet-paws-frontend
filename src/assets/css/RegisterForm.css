@@ -1,0 +1,80 @@
+
+body{
+  background-color: #FF797D;
+
+  color: #564434;
+}
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    /*border: 2px solid #564434;*/
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .register-form__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+font-size: 27px;
+font-weight: 600;
+line-height: 32.68px;
+text-align: center;
+color: #F5F6F9;
+
+}
+
+  .register-form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #FF585D;
+    background-color: #F5E1DC;
+    color: #FF585D;
+  }
+  .register-form input::placeholder {
+    color: #FF585D;
+    font-weight: 400;
+  }
+
+  .register-form .submit-button {
+    padding: 10px;
+    background-color: #DA6274;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .register-form select {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #F5E1DC;
+    color: #FF585D;
+  }
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+
+  .success {
+    color: green;
+    margin-bottom: 10px;
+  }
+  .register-form__google-button {
+    background-color: #fff;
+    color: #564434;
+    /*border: none;*/
+    border-radius: 5px;
+    border: 1px solid #564434;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 0;
+  }
