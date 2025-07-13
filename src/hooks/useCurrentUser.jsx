@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react"
+import {fetchUser} from "../services/users.js";
 
 export const useCurrentUser=()=>{
   const [current_user,setUser]=useState({});
 
   useEffect(()=>{
-    setUser(
-      {
-        id:1,
-        name:"Jhon",
-        lastname:"Doe",
-        picture:"user.png"
-      }
-    );
+    const fetchData = async () => {
+      const user = await fetchUser(1);
+      setUser(user);
+    };
+    fetchData();
   },[]);
 
   return current_user;
