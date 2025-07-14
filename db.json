@@ -6,7 +6,9 @@
       "lastname":"Doe",
       "picture":"user.png",
       "phone":"1234567890",
-      "address":"1234 Main St"
+      "address":"1234 Main St",
+      "username":"jdoe",
+      "about":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero."
     }
   ],
   "posts":[

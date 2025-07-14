@@ -1,3 +1,145 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Odin Rounded */
+@font-face {
+  font-family: "Odin Rounded";
+  src: url("/src/assets/fonts/OdinRounded/OdinRoundedRegular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Odin Rounded";
+  src: url("/src/assets/fonts/OdinRounded/OdinRoundedRegularItalic.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Odin Rounded";
+  src: url("/src/assets/fonts/OdinRounded/OdinRoundedBold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Odin Rounded";
+  src: url("/src/assets/fonts/OdinRounded/OdinRoundedBoldItalic.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Odin Rounded";
+  src: url("/src/assets/fonts/OdinRounded/OdinRoundedLight.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Odin Rounded";
+  src: url("/src/assets/fonts/OdinRounded/OdinRoundedLightItalic.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Sofia Pro */
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProRegularAz.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProRegularItalicAz.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProBoldAz.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProBoldItalicAz.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProLightAz.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProLightItalicAz.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProMediumAz.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProMediumItalicAz.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProBlackAz.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("/src/assets/fonts/SofiaPro/SofiaProBlackItalicAz.otf")
+    format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+@layer components {
+  .btn-primary {
+    @apply bg-custom-250 w-full p-2 mb-4 mt-4 border-2 border-custom-250 rounded-xl text-custom-50 shadow-3xl;
+  }
+  .btn-secondary {
+    @apply bg-custom-150 w-full p-2 mb-4 mt-4 border-2 border-custom-200 rounded-xl text-custom-350 shadow-4xl;
+  }
+
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-700 text-white;
+  }
+}
+
+body {
+  @apply font-sofia;
+}
