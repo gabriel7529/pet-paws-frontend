@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import {useParams} from 'react-router-dom';
 import { useGetUser } from '../../hooks/useGetUser';
 import { useGetUserPosts } from '../../hooks/useGetUserPosts';
-import Post from '../../components/Post';
 
 function Profile() {
   const { t } = useTranslation();
@@ -14,49 +13,64 @@ function Profile() {
     <>
     {
       user===undefined ? <h2>{t("loading")}</h2>:
-      <section className='profile-page flex flex-wrap lg:flex-nowrap align-top content-around w-auto'>
-         <section className="w-full lg:w-1/4 text-center bg-white rounded shadow mx-5">
-          <div className="mx-auto my-2">
-              <img className="h-20 w-20 rounded-full m-auto  shadow shadow-pink-300"
-                    src={"/img/users/" + user.picture}
-                    alt={user.name}
-                  />
+      <section className='profile-page flex flex-wrap align-top content-around w-auto px-0 mx-0 lg:justify-center'>
+         <section className="w-full lg:w-1/3 lg:p-10 text-center bg-white flex px-8 align-middle">
+          <div className="my-2 w-1/4 px-0 flex flex-col items-center">
+              <img
+                className="h-auto w-20 rounded-full m-auto shadow shadow-pink-300"
+                src={"/img/users/" + user.picture}
+                alt={user.name}
+              />
+              <button className="p-0 bg-white flex items-center justify-center text-custom-250 font-semibold mt-3 text-sm w-auto">
+                <svg className="w-[17px] h-[17px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <title>heart-circle</title>
+                  <path fill="#ff585d" d="M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M9.75,7.82C10.62,7.82 11.45,8.23 12,8.87C12.55,8.23 13.38,7.82 14.25,7.82C15.79,7.82 17,9.03 17,10.57C17,12.46 15.3,14 12.72,16.34L12,17L11.28,16.34C8.7,14 7,12.46 7,10.57C7,9.03 8.21,7.82 9.75,7.82Z"/>
+                </svg>
+                Seguir
+              </button>
           </div>
-          <h2 className="text-2xl font-bold">{user.name} {user.lastname}</h2>
-          <ul className='max-w-md divide-y divide-pink-200 dark:divide-gray-700  px-5 lg:px-10'>
-              <li className="mb-3 pt-3">
-                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                         {t('cellphone')}:
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                           {user.phone}
-                        </p>
-                    </div>
+          <div id="user-info" className='w-3/4'>
+              <div className='flex w-full text-left pl-5 mb-3'>
+                <div className='w-10/12'>
+                    <h2 className="text-xl font-bold text-custom-350">{user.name} {user.lastname}</h2>
+                    <h5 className="text-sm text-custom-250">@{user.username}</h5>
                 </div>
-              </li>
-              <li className="mb-3 pt-3">
-                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {t('address')}:
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                           {user.address}
-                        </p>
-                    </div>
+                <div className='w-2/12'>
+                  <button className='w-full py-2 bg-white text-white font-bold rounded-tr-lg'>
+                    <svg className='w-[35px]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><
+                      title>dots-horizontal</title>
+                      <path fill="#ff585d " d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" /></svg>
+                  </button>
                 </div>
-              </li>
-          </ul>
+              </div>
+              <div className='flex w-full text-left pl-5'>
+                  <p className="text-sm text-custom-250 text-justify">
+                                  {user.about}
+                  </p>
+              </div>
+          </div>
          </section>
-         <section className='w-full lg:w-3/4 rounded mx-5'>
-            <h1 className='w-full p-5 lg:px-10 uppercase font-bold text-pink-500 border-pink-500 border-b-2 mb-3'>
-              {t('myPosts')}
-            </h1>
-            {posts.map((post)=>(
-              console.log(post),
-              <Post key={post.id} post={post}></Post>
+         <section className='w-full mx-0 mt-5 p-5 border-solid border-t border-b border-custom-200 flex justify-around'>
+          <div className=''>
+              <button className='w-full p-0 bg-white flex text-custom-150 font-semibold text-sm content-between'>
+                <svg className='w-[42px] h-[42px]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pound</title><path  fill="#FFB0A9" d="M5.41,21L6.12,17H2.12L2.47,15H6.47L7.53,9H3.53L3.88,7H7.88L8.59,3H10.59L9.88,7H15.88L16.59,3H18.59L17.88,7H21.88L21.53,9H17.53L16.47,15H20.47L20.12,17H16.12L15.41,21H13.41L14.12,17H8.12L7.41,21H5.41M9.53,9L8.47,15H14.47L15.53,9H9.53Z" /></svg>
+              </button>
+          </div>
+          <div className=''>
+              <button className='w-full p-0 bg-white flex text-custom-150 font-semibold text-sm content-between'>
+                <svg className='w-[42px] h-[42px]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>bookmark</title><path fill="#FFB0A9" d="M17,3H7A2,2 0 0,0 5,5V21L12,18L19,21V5C19,3.89 18.1,3 17,3Z" /></svg>
+              </button>
+          </div>
+         </section>
+         <section className='w-full mx-0 grid grid-cols-3 gap-4 p-5'>
+            {posts.map((post) => (
+              <div key={post.id} className="aspect-square">
+                <img
+                  className="object-cover h-full w-full rounded-2xl"
+                  src={post.pictures?.[0]?.url || 'default.jpg'}
+                  alt={post.name}
+                />
+              </div>
             ))}
          </section>
       </section>

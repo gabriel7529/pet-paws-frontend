@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Modal from '../components/ModalForm';
+import PublicForm from '../components/PublicForm';
 
 const Feed = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -9,8 +9,8 @@ const Feed = () => {
   return (
     <div className="App">
 
-      <Modal show={isModalOpen} onClose={toggleModal}>
-      </Modal>
+      <PublicForm show={isModalOpen} onClose={toggleModal}>
+      </PublicForm>
     </div>
   );
 };
