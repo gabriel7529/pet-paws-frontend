@@ -100,5 +100,11 @@
   "confirmationCode": "confirmation code",
   "enterNumberPhone": "Enter your phone number",
   "numberPhone": "Phone number",
-  "errorPhoneNumber": "It is not a valid cell phone number"
+  "errorPhoneNumber": "It is not a valid cell phone number",
+  "nextButton": "Next step",
+  "previousButton": "Previous step",
+  "submitButton": "Submit",
+  "submitPhoto": "Submit Photo",
+  "usernameRequired": "Username is required",
+  "passwordRequired": "Password is required"
 }

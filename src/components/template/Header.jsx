@@ -3,7 +3,7 @@ import SearchButton from "./header/SearchButton";
 
 const Header=()=>{
     return (
-    <header className='flex border-b py-4 px-4 mb-3 sm:px-10 bg-pink-500 font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
+    <header className='flex border-b py-4 px-4 mb-3 sm:px-10 bg-custom-200 font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
       <div className="container mx-auto">
         <div className='flex flex-wrap items-center gap-5 w-full'>
           <a className="flex items-center">

@@ -100,5 +100,11 @@
   "confirmationCode": "código de confirmación",
   "enterNumberPhone": "Ingresa tu número de celular",
   "numberPhone": "Número de celular",
-  "errorPhoneNumber": "No es un número de celular válido"
+  "errorPhoneNumber": "No es un número de celular válido",
+  "nextButton": "Siguiente",
+  "previousButton": "Anterior",
+  "submitButton": "Enviar",
+  "submitPhoto": "Subir foto",
+  "usernameRequired": "Usuario es requerido",
+  "passwordRequired": "Contraseña es requerida"
 }
