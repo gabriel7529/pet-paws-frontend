@@ -8,6 +8,7 @@
       "phone":"1234567890",
       "address":"1234 Main St",
       "username":"jdoe",
+      "password":"123456",
       "about":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero."
     }
   ],
