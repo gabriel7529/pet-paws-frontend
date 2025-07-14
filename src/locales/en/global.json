@@ -106,5 +106,7 @@
   "submitButton": "Submit",
   "submitPhoto": "Submit Photo",
   "usernameRequired": "Username is required",
-  "passwordRequired": "Password is required"
+  "passwordRequired": "Password is required",
+  "followLabel": "Follow",
+  "petInfoTitle": "Pet data"
 }
