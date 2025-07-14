@@ -22,7 +22,7 @@ const FormField = ({ field }) => {
             placeholder={t(field.labelKey)}
             {...register(field.name)}
           />
-          {error && <p className="error text-custom-50">{error.message}</p>}
+          {error && <p className="error text-custom-50">{t(error.message)}</p>}
         </div>
       );
     case 'radio':
@@ -39,7 +39,7 @@ const FormField = ({ field }) => {
               />
             </label>
           ))}
-          {error && <p className="error text-custom-50">{error.message}</p>}
+          {error && <p className="error text-custom-50">{t(error.message)}</p>}
         </div>
       );
     default:

@@ -60,8 +60,7 @@ export function ModalFormulario() {
       body: JSON.stringify(formData),
     })
     .then(response => response.json())
-    .then(data => {
-      console.log('Formulario enviado con éxito:', data);
+    .then(() => {
       setOpenModal(false);
     })
     .catch(error => {
