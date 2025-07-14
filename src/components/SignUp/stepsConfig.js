@@ -11,13 +11,13 @@ export const steps = [
         name: 'firstName',
         labelKey: 'name',
         type: 'text',
-        validation: Yup.string().required('El nombre es obligatorio'),
+        validation: Yup.string().required('nameRequired'),
       },
       {
         name: 'lastName',
         labelKey: 'lastName',
         type: 'text',
-        validation: Yup.string().required('El apellido es obligatorio'),
+        validation: Yup.string().required('lastNameRequired'),
       },
     ],
   },
@@ -33,7 +33,7 @@ export const steps = [
         validation: Yup.date()
         .nullable()
         .transform((curr, orig) => (orig === '' ? null : curr))
-        .required('La fecha de nacimiento es obligatoria'),
+        .required('birthDateRequired'),
       },
     ],
   },
@@ -51,7 +51,7 @@ export const steps = [
           { value: 'Hombre', labelKey: 'man' },
           { value: 'Otro', labelKey: 'other' },
         ],
-        validation: Yup.string().required('El género es obligatorio'),
+        validation: Yup.string().required('genderRequired'),
       },
     ],
   },
@@ -61,21 +61,21 @@ export const steps = [
     subtitleKey: 'enterUsernameAndPass',
     fields: [
       {
-        name: 'userName',
-        labelKey: 'userName',
+        name: 'username',
+        labelKey: 'username',
         type: 'text',
-        validation: Yup.string().required('El nombre de usuario es obligatorio'),
+        validation: Yup.string().required('usernameRequired'),
       },
       {
         name: 'password',
         labelKey: 'password',
         type: 'password',
         validation: Yup.string()
-          .required('La contraseña es obligatoria')
-          .min(8, 'La contraseña debe tener al menos 8 caracteres')
-          .matches(/[a-zA-Z]/, 'La contraseña debe contener letras')
-          .matches(/\d/, 'La contraseña debe contener números')
-          .matches(/[!@#$%^&*(),.?":{}|<>]/, 'La contraseña debe contener símbolos'),
+          .required('passwordRequired')
+          .min(8, 'passwordLengthError')
+          .matches(/[a-zA-Z]/, 'passwordLetterError')
+          .matches(/\d/, 'passwordNumberError')
+          .matches(/[!@#$%^&*(),.?":{}|<>]/, 'passwordSymbolError'),
       },
     ],
   },
@@ -89,8 +89,8 @@ export const steps = [
         labelKey: 'email',
         type: 'email',
         validation: Yup.string()
-          .email('Email inválido')
-          .required('El email es obligatorio'),
+          .email('emailError')
+          .required('emailRequired'),
       },
     ],
     alternative: {
@@ -108,8 +108,8 @@ export const steps = [
         labelKey: 'numberPhone',
         type: 'number',
         validation: Yup.string()
-          .matches(/^9\d{8}$/, 'Número de teléfono inválido')
-          .required('El número de teléfono es obligatorio'),
+          .matches(/^9\d{8}$/, 'errorPhoneNumber')
+          .required('phoneNumberRequired'),
       },
     ],
   },
@@ -123,8 +123,8 @@ export const steps = [
         labelKey: 'confirmationCode',
         type: 'text',
         validation: Yup.string()
-          .matches(/^\d{6}$/, 'Código inválido')
-          .required('El código es obligatorio'),
+          .matches(/^\d{6}$/, 'errorCode')
+          .required('codeRequired'),
       },
     ],
   },
