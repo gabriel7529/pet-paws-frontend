@@ -3,18 +3,18 @@ import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import LanguageSwitcher from "../components/LanguageSwitcher";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-
+import LanguageSwitcher from "../components/ui/LanguageSwitcher";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { loginUser } from "../services/users";
+import { toast } from "sonner";
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const schema = yup.object().shape({
-    username: yup.string().required(t('usernameRequired')),
-    password: yup.string().required(t('passwordRequired')),
+    username: yup.string().required(t("usernameRequired")),
+    password: yup.string().required(t("passwordRequired")),
   });
   const {
     register,
@@ -24,8 +24,20 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const result = await loginUser(data.username, data.password);
+      if (result.length > 0) {
+        localStorage.setItem("user", JSON.stringify(result[0]));
+        toast.success(t("loginSuccess"));
+        navigate("/feed");
+      } else {
+        toast.error(t("loginError"));
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(t("loginError"));
+    }
   });
   return (
     <div className="h-screen bg-custom-50 flex flex-col items-center justify-center">
@@ -62,20 +74,19 @@ const Login = () => {
           </p>
         </div>
 
-        <Button onClick={()=>{
-            navigate('/signup');
-          }}   className="btn-secondary mt-auto">
+        <Button
+          onClick={() => {
+            navigate("/signup");
+          }}
+          className="btn-secondary mt-auto"
+        >
           {t("createAccount")}
         </Button>
         <div className="login__footer flex mt-8 text-custom-200 font-bold">
           <p>Pet Paws</p>
-
         </div>
-
-
       </div>
     </div>
   );
 };
 export default Login;
-
