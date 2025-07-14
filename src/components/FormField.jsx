@@ -10,7 +10,7 @@ const FormField = ({
 }) => {
   if (type === "radio") {
     return (
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-8 space-y-8">
         <label className="block text-sm font-medium text-gray-900">{label}</label>
         {options.map((option, index) => (
           <div key={index} className="flex items-center">
@@ -19,7 +19,7 @@ const FormField = ({
               type="radio"
               value={option.value}
               name={id}
-              className="w-4 h-4 text-blue-600"
+              className="w-5 h-5 text-blue-600"
               {...props}
             />
             <label htmlFor={option.value} className="ml-2 text-sm">
@@ -47,7 +47,7 @@ const FormField = ({
 
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-900">{label}</label>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-900 my-4">{label}</label>
       <input
         type={type}
         id={id}
