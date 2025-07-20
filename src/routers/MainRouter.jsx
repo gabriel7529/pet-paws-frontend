@@ -17,17 +17,11 @@ export const MainRouter = () => {
       <Toaster richColors expand={true} />
       {!hideHeaderRoutes.includes(location.pathname) && <Header />}
       <Routes>
-        <Route path="/" element={<Home></Home>} />,
-        <Route path="/feed" element={<Feed></Feed>} />
-        <Route
-          path="/pet/:id"
-          element={<DetailsPublication></DetailsPublication>}
-        />
-        <Route path="/user/:id" element={<UserProfile></UserProfile>} />
-        <Route
-          path="/user/edit/:id"
-          element={<UserEditProfile></UserEditProfile>}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/pet/:id" element={<DetailsPublication />} />
+        <Route path="/user/:id" element={<UserProfile />} />
+        <Route path="/user/edit/:id" element={<UserEditProfile />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
