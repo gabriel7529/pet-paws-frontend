@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ addClass }) => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
@@ -35,15 +36,18 @@ const LanguageSwitcher = () => {
   }, [dropdownRef]);
 
   return (
-    <div className="relative w-64 m-auto text-center" ref={dropdownRef}>
+    <div
+      className={`relative w-64 m-auto text-center ${addClass}`}
+      ref={dropdownRef}
+    >
       <button
         onClick={toggleDropdown}
-        className="bg-custom-200 border text-custom-50 p-2 w-full rounded-lg focus:outline-none focus:ring-custom-300 focus:border-custom-500 dark:text-white flex justify-between items-center"
+        className="bg-custom-200 md:bg-custom-100 border text-custom-50 md:text-custom-200 p-2 w-full rounded-lg focus:outline-none focus:ring-custom-300 focus:border-custom-500 dark:text-white flex justify-between items-center font-semibold"
       >
         {languages.find((l) => l.code === selectedLanguage)?.label}
         {/* Triángulo hacia abajo */}
         <svg
-          className="ml-2 w-4 h-4 fill-current text-white"
+          className="ml-2 w-4 h-4 fill-current text-white md:text-custom-200"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 320 512"
         >
@@ -66,6 +70,10 @@ const LanguageSwitcher = () => {
       )}
     </div>
   );
+};
+
+LanguageSwitcher.propTypes = {
+  addClass: PropTypes.string,
 };
 
 export default LanguageSwitcher;
