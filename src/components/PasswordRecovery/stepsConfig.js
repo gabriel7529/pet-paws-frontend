@@ -34,7 +34,7 @@ export const steps = [
         labelKey: "confirmationCode",
         type: "text",
         validation: Yup.string()
-          .matches(/^\d{6}$/, "errorCode")
+          .matches(/^\d{7}$/, "errorCode")
           .required("codeRequired"),
       },
     ],

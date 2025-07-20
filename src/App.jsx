@@ -1,30 +1,36 @@
-import './assets/css/App.css'
-import {PetContext} from "./contexts/PetContext"
-import { MainRouter } from './routers/MainRouter'
+import "./assets/css/App.css";
+import { PetContext } from "./contexts/PetContext";
+import { MainRouter } from "./routers/MainRouter";
 import { I18nextProvider } from "react-i18next";
-import i18n from './i18n.jsx'
+import { ConfigProvider } from "./contexts/config/ConfigContext.jsx";
+import { UserProvider } from "./contexts/UserContext.jsx";
+import i18n from "./i18n.jsx";
 
-import { useCurrentUser } from './hooks/useCurrentUser.jsx';
-import { BrowserRouter } from 'react-router-dom';
+import { useCurrentUser } from "./hooks/useCurrentUser.jsx";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  const current_user=useCurrentUser();
+  const current_user = useCurrentUser();
 
   return (
     <>
       <div className="App bg-white min-h-screen pb-[70px]">
         <I18nextProvider i18n={i18n}>
-          <PetContext.Provider value={{current_user}}>
-            <div>
-                <BrowserRouter>
-                  <MainRouter/>
-                </BrowserRouter>
-            </div>
-          </PetContext.Provider>
+            <UserProvider>
+              <ConfigProvider>
+                <PetContext.Provider value={{ current_user }}>
+                  <div>
+                    <BrowserRouter>
+                      <MainRouter />
+                    </BrowserRouter>
+                  </div>
+                </PetContext.Provider>
+              </ConfigProvider>
+            </UserProvider>
         </I18nextProvider>
-       </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
