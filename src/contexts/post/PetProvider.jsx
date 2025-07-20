@@ -1,34 +1,16 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { formatData } from '../../helpers/formatPostData';
 
 // Crear el contexto
-const PetContext = createContext();
+export const PetContext = createContext();
 
 // Proveedor del contexto
 export const PetProvider = ({ children }) => {
-  const [petData, setPetData] = useState(() => {
-    const savedData = localStorage.getItem('petData');
-    return savedData ?
-    JSON.parse(savedData) : {
-      id: '',
-      name: 'anonimo',
-      pet_type: '',
-      pet_gender: '',
-      pet_description: '',
-      pet_size: '',
-      pet_age: '',
-      date_lost: '',
-      reward: '60',
-      user_id: 1,
-      pictures: []
-    };
-
-  });
-
-  useEffect(() => {
-    localStorage.setItem('petData', JSON.stringify(petData));
-  }, [petData]);
-
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [petData, setPetData] = useState(
+    formatData(user)
+  );
   return (
     <PetContext.Provider value={{ petData, setPetData }}>
       {children}
@@ -44,6 +26,4 @@ PetProvider.propTypes = {
   ]).isRequired
 };
 
-// Hook para usar el contexto
-export const usePetData = () => useContext(PetContext);
 
