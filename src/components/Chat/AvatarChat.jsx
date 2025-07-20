@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
   return (
     <div className={`${sizeClasses[size]} bg-custom-150 rounded-full flex items-center justify-center`}>
-      <img src={image || "/src/assets/img/Icons/avatar_placeholder.svg"} className="rounded-full"></img>
+      <img src={image || "/src/assets/img/Icons/avatar_placeholder.svg"} className="rounded-full w-full"></img>
     </div>
   );
 };

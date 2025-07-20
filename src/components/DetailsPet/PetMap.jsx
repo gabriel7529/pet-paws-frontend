@@ -1,15 +1,55 @@
-const PetMap = () => {
+import { useState } from "react";
+import { Modal } from "flowbite-react";
+import PropTypes from "prop-types";
+import Map, { Marker } from "react-map-gl";
+
+const mapToken = import.meta.env.VITE_MAPBOXGL_TOKEN;
+
+const PetMap = ({ latitude, longitude }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalToggle = () => {
+    setIsModalOpen((prev) => !prev);
+  };
+
   return (
-    <div className="w-full h-48">
-      <iframe
-        className="w-full h-full rounded-lg"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.641937056803!2d-77.01972472524027!3d-12.089292258187192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ce5688d350a3%3A0x10987b1dbba72e80!2sSurquillo%2C%20Lima%2015047%2C%20Per%C3%BA!5e0!3m2!1ses-419!2sus!4v1632028993878!5m2!1ses-419!2sus"
-        allowFullScreen=""
-        loading="lazy"
-        title="map"
-      ></iframe>
-    </div>
+    <>
+      <button onClick={handleModalToggle} className="bg-transparent text-pink-500">
+        <img
+          src="/src/assets/img/Icons/location_pink.svg"
+          alt="location icon"
+          className="w-10 h-10"
+        />
+      </button>
+
+      <Modal show={isModalOpen} onClose={handleModalToggle}>
+        <Modal.Header className="bg-[#ff797d]">
+          <p className="text-white">Ubicación del perrito</p>
+        </Modal.Header>
+        <Modal.Body className="bg-[#ff797d] text-white">
+          <div className="w-full h-[400px] rounded-lg overflow-hidden">
+            <Map
+              initialViewState={{
+                latitude: latitude,
+                longitude: longitude,
+                zoom: 14,
+              }}
+              style={{ width: "100%", height: "100%" }}
+              mapStyle="mapbox://styles/mapbox/streets-v12"
+              mapboxAccessToken={mapToken}
+            >
+              <Marker latitude={latitude} longitude={longitude} color="red" />
+            </Map>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </>
   );
+};
+
+PetMap.propTypes = {
+  latitude: PropTypes.number,
+  longitude: PropTypes.number,
 };
 
 export default PetMap;

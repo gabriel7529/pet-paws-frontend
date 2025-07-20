@@ -11,7 +11,7 @@ const PetDescription = ({name, description, imageUrl, imageUser, postData}) => {
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
-  
+
   return (
     <>
       <div className="container mx-auto">
@@ -41,7 +41,6 @@ const PetDescription = ({name, description, imageUrl, imageUser, postData}) => {
 
           </div>
         </Modal.Body>
-
       </Modal>
     </>
   );

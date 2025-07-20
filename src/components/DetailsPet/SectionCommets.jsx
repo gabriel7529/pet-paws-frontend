@@ -51,14 +51,14 @@ const SectionCommets = ({ postId }) => {
 
   return (
     <div className="px-5">
-       <div className="overflow-auto max-h-80">
+       <div className="overflow-auto max-h-96">
           {comentarios.length > 0 ? (
             comentarios.map((comentario, index) => (
               <Comentario
                 key={comentario.id || `temp-${index}`}
                 avatar={ usuarios[comentario.userId] ? usuarios[comentario.userId].avatar : "/src/assets/img/Icons/avatar_placeholder.svg"}
                 nombre={usuarios[comentario.userId] ? usuarios[comentario.userId].name : `Usuario ${comentario.userId}`}
-                tiempo={comentario.createdAt ? new Date(comentario.createdAt).toLocaleString() : new Date().toLocaleString()}
+                tiempo={comentario.createdAt ? new Date(comentario.createdAt).toLocaleDateString() : new Date().toLocaleDateString()}
                 texto={comentario.content}
               />
             ))

@@ -1,8 +1,9 @@
 import { usePetData } from '../../hooks/usePetData';
-
+import { useTranslation } from "react-i18next";
 
 const DescriptionBox = () => {
   const { petData, setPetData } = usePetData();
+  const { t } = useTranslation();
 
   const handleDescriptionChange = (e) => {
     setPetData({
@@ -14,7 +15,7 @@ const DescriptionBox = () => {
   return (
 
       <div className="mb-4">
-      <h3 className="mb-3 text-[#FF4146] font-medium">Descripción</h3>
+      <h3 className="mb-3 text-[#FF4146] font-medium">{t("descriptionPet")}</h3>
       <textarea
         className="w-full p-2 border-2 border-[#FFB0A9] rounded-lg"
         maxLength="320"
