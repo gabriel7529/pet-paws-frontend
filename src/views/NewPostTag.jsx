@@ -2,10 +2,12 @@ import ContinueButton from "../components/PostPet/StatePet/ContinueButton";
 import InputWithRow from "../components/PostPet/StatePet/InputWithRow";
 import { usePetData } from "../hooks/usePetData";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const NewPostTag = () => {
   const { petData, setPetData } = usePetData();
   const [tags, setTags] = useState(petData.tags || []); // Estado de tags global
+  const { t } = useTranslation();
 
   const handleTagsChange = (newTag) => {
     if (newTag && !tags.includes(newTag)) {
@@ -28,7 +30,7 @@ const NewPostTag = () => {
   return (
     <div className="max-w-[375px] mx-auto p-4">
       <InputWithRow
-        placeholderText="Coloca aquí tus etiquetas"
+        placeholderText={t("insertTagsLabel")}
         onTagsChange={handleTagsChange} // Pasamos la función para actualizar los tags
       />
 

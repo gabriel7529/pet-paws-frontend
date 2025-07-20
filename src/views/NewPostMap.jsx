@@ -4,22 +4,26 @@ import PlacesProvider from "../contexts/places/PlacesProvider";
 import PlacesContext from "../contexts/places/PlacesContext";
 import { usePetData } from '../hooks/usePetData';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ2FicmllbDI5LXMiLCJhIjoiY20yMnZvYnExMDJwNzJqcTV3d3J3cmUxdSJ9.fA3z9inzGxKvS2GC_rH20g';
+
+
+const mapToken = import.meta.env.VITE_MAPBOXGL_TOKEN;
+mapboxgl.accessToken = mapToken;
 
 const NewPostMap = () => {
+  const { t } = useTranslation();
   const { userLocation, isLoading } = useContext(PlacesContext);
   const { petData, setPetData } = usePetData();
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
   const navigate = useNavigate();
-  const [markerLocation, setMarkerLocation] = useState(userLocation); // Almacena la ubicación actual del marcador
+  const [markerLocation, setMarkerLocation] = useState(userLocation);
+  // Almacena la ubicación actual del marcador
 
   useEffect(() => {
 
     if (!userLocation || isLoading || mapRef.current) return;
-
-    console.log(petData.sightingData);
 
     mapRef.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -43,35 +47,57 @@ const NewPostMap = () => {
   }, [userLocation, isLoading, petData.sightingData]);
 
   // Función para confirmar y guardar la ubicación en petData
-  const handleSaveLocation = () => {
-    setPetData({
-      ...petData,
-      sightingData: {
-        ...petData.sightingData,
-        longitude: markerLocation[0],
-        latitude: markerLocation[1],
-      },
-    });
-    alert("Ubicación guardada correctamente");
-    navigate('/post');
+  const handleSaveLocation = async () => {
+    try {
+      const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${markerLocation[0]},${markerLocation[1]}.json?access_token=${mapToken}`);
+      const data = await response.json();
+      if (data && data.features && data.features.length > 0) {
+        // Extraer la información deseada del JSON
+        const feature = data.features.find(f => f.place_type.includes("address"));
+        if (feature) {
+          /*const street = feature.text;
+          const district = feature.context.find(c => c.id.includes("place")).text; //
+          const region = feature.context.find(c => c.id.includes("region")).text; //
+          */
+          //console.log(feature.place_name);
+          setPetData({
+            ...petData,
+            location: feature.place_name, // Formato personalizado
+            sightingData: {
+              ...petData.sightingData,
+              longitude: markerLocation[0],
+              latitude: markerLocation[1],
+            },
+          });
+          alert(t("saveLocation"));
+          navigate('/post');
+        } else {
+          console.log("No se encontró una dirección exacta para estas coordenadas.");
+        }
+      } else {
+        console.log("No se encontró información para estas coordenadas.");
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
   };
 
   return (
     <div>
       {isLoading ? (
-      <p>Cargando mapa...</p> 
+      <p>{t("loadingText")}</p>
     ) : (
       <div ref={mapContainer} className="w-full h-screen" />
     )}
       {markerLocation && (
         <div className="absolute bottom-20 left-10 bg-white p-2 rounded">
-          <p>Latitud: {markerLocation[1]}</p>
-          <p>Longitud: {markerLocation[0]}</p>
+          <p>{t("registeLocation")}</p>
+
           <button
             onClick={handleSaveLocation}
-            className="mt-2 bg-blue-500 text-white p-2 rounded"
+            className="mt-2 bg-custom-250 text-white p-2 rounded"
           >
-            Guardar Ubicación
+            {t("saveLocation")}
           </button>
         </div>
       )}

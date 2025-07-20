@@ -2,8 +2,10 @@ import ImageUploader from "../components/PostPet/ImageUploader";
 import DescriptionBox from "../components/PostPet/DescriptionBox";
 import ActionButton from "../components/PostPet/ActionButton";
 import PublishButton from "../components/PostPet/PublishButton";
+import { useTranslation } from "react-i18next";
 
 const NewPostPet = () => {
+  const { t } = useTranslation();
 
   return (
     <div className="mx-auto p-4 bg-white-200 rounded-lg">
@@ -18,25 +20,25 @@ const NewPostPet = () => {
 
       <div className="md:w-1/2 p-8 space-y-6 flex flex-col">
         <ActionButton
-          text="Agregar información"
+          text={t("addInfoPet")}
           icon="/src/assets/img/Icons/info.svg"
           redirectTo="/post/info"
         />
 
         <ActionButton
-          text="Agregar ubicación"
+          text={t("addLocationPet")}
           icon="/src/assets/img/Icons/location_pink.svg"
           redirectTo="/post/map"
         />
 
         <ActionButton
-          text="Agregar estado"
-          icon={"/src/assets/img/Icons/logo.svg"}
+          text={t("addStatePet")}
+          icon={"/src/assets/img/Icons/SVG/logoState.svg"}
           redirectTo="/post/state"
         />
 
         <ActionButton
-          text="Agregar etiquetas"
+          text={t("addTagPet")}
           icon={"/src/assets/img/Icons/Tags.svg"}
           redirectTo="/post/tag"
         />

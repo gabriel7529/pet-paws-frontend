@@ -2,10 +2,11 @@ import { usePetData } from '../hooks/usePetData';
 import FormSelect from '../components/PostPet/AddInfo/FormSelect';
 import FormField from '../components/FormField';
 import ContinueButton from '../components/PostPet/StatePet/ContinueButton';
+import { useTranslation } from "react-i18next";
 
 
 const NewPostAddInfo = () => {
-
+  const { t } = useTranslation();
   const { petData, setPetData } = usePetData();
 
   const languageMap = {
@@ -70,14 +71,15 @@ const NewPostAddInfo = () => {
     <div className="min-h-screen flex items-start justify-center">
       <form className="bg-white p-6 w-full max-w-md" onSubmit={handleSubmit}>
         <FormField
-          label="Nombre"
+          label={t("namePet")}
           type="text"
           value={petData.petData.name} // Usamos el valor del contexto
           onChange={(e) => handleChange('petData', 'name', e.target.value)}
           placeholder='Nombre de la mascota'
         />
+        <br/>
         <FormSelect
-          label="Especie"
+          label={t("speciesPet")}
           value={getDisplayValue('petType', petData.petData.petType)} // Usamos el valor del contexto
           onChange={(e) => {
             const valueMap = {
@@ -93,7 +95,7 @@ const NewPostAddInfo = () => {
         />
 
         <FormSelect
-          label="Sexo"
+          label={t("genderLabel")}
           value={getDisplayValue('gender',petData.petData.gender)} // Usamos el valor del contexto
           onChange={(e) => {
             const valueMap = {
@@ -106,7 +108,7 @@ const NewPostAddInfo = () => {
         />
 
         <FormSelect
-          label="Edad aproximada"
+          label={t("approximateAgePet")}
           value={getDisplayValue('age',petData.petData.age)} // Usamos el valor del contexto
           onChange={(e) => {
             const valueMap = {
@@ -121,7 +123,7 @@ const NewPostAddInfo = () => {
         />
 
         <FormSelect
-          label="Tamaño"
+          label={t("sizeLabel")}
           value={getDisplayValue('size',petData.petData.size)} // Usamos el valor del contexto
           onChange={(e) => {
             const valueMap = {
@@ -135,7 +137,7 @@ const NewPostAddInfo = () => {
         />
 
         <FormField
-              label="Fecha aproximada de desaparición o aparición"
+              label={t("approximateDate")}
               type="datetime-local"
               value={petData.date_lost}
               onChange={(e) => handleChange('', 'date_lost', e.target.value)}
