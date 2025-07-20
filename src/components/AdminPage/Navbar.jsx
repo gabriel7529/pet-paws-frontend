@@ -86,6 +86,19 @@ const Navbar = ({ setOption }) => {
                 Posts
               </button>
             </li>
+            <li>
+              <button
+                href="#"
+                className="block py-2 px-3 text-blue-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                onClick={() => {
+                  setOption("dashboard");
+                  setMenuOpen(false);
+                }}
+              >
+                Dashboard
+              </button>
+            </li>
           </ul>
         </div>
       </div>

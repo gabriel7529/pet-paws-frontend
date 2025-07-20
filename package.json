@@ -15,7 +15,11 @@
     "api": "json-server --watch db.json --routes apiRoutes.json --port 8080"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@headlessui/tailwindcss": "^0.2.1",
     "@hookform/resolvers": "^3.9.0",
+    "@remixicon/react": "^4.5.0",
+    "@tremor/react": "^3.18.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "flowbite-react": "^0.10.1",
@@ -27,6 +31,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "react-i18next": "^15.0.2",
+    "react-map-gl": "^7.1.7",
     "react-router-dom": "^6.26.2",
     "socket.io-client": "^4.8.1",
     "sonner": "^1.5.0",
@@ -36,6 +41,7 @@
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.9.0",
+    "@tailwindcss/forms": "^0.5.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
