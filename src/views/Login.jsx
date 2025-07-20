@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { useUser } from '../hooks/useUser';
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { useTranslation } from "react-i18next";
@@ -7,7 +8,8 @@ import { useNavigate, Link } from "react-router-dom";
 import LanguageSwitcher from "../components/ui/LanguageSwitcher";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { loginUser } from "../services/users";
+import { loginUser, fetchUserByEmail } from "../services/users";
+import { getConfig } from "../services/config";
 import { toast } from "sonner";
 import Header from "../components/ui/Header";
 
@@ -26,6 +28,7 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
   const [isMediumScreen, setIsMediumScreen] = useState(false);
+  const { login, setData} = useUser();
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,6 +48,12 @@ const Login = () => {
       if (profile) {
 
         localStorage.setItem("user", JSON.stringify(profile));
+
+        const data = await fetchUserByEmail(profile.email);
+        const config = await getConfig(profile.id);
+
+        setData({...data, ...config.data});
+        login(data);
 
         toast.success(t("loginSuccess"));
         navigate("/feed");

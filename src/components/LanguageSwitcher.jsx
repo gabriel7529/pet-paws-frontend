@@ -1,11 +1,29 @@
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { getConfig, updateConfig } from "../services/config";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const handleLanguageChange = (e) => {
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+      i18n.changeLanguage(savedLanguage);
+    }
+  }, [i18n]);
+
+  const handleLanguageChange = async (e) => {
     const newLang = e.target.value;
-    i18n.changeLanguage(newLang);
+
+    try {
+      await i18n.changeLanguage(newLang);
+      localStorage.setItem('language', newLang);
+      const config = await getConfig(user.id);
+      await updateConfig(config.data.id, { language: newLang.toUpperCase() });
+    } catch (error) {
+      console.error("Error updating language:", error);
+    }
   };
 
   return (

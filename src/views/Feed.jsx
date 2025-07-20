@@ -36,21 +36,26 @@ const Feed = () => {
       </Button>
     </div>
 
+    <button onClick={()=>navigate("/settings")}>Edit Settings, !delethe this in feed!</button>
 
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {posts.map((post) => (
-        <Link to={`/pet/${post.id}`} key={post.id}>
-          <CardPostPet
-            name={post.name}
-            description={post.description}
-            //imageUrl={post.pictures?.[0]?.url}
-            imageUrl={post.picture}
-            t={(key) => key}
-            handleModalToggle={toggleModal}
-          />
-        </Link>
-      ))}
+    {posts.length > 0 ? (
+  posts.map((post) => (
+    <Link to={`/pet/${post.id}`} key={post.id}>
+      <CardPostPet
+        name={post.name}
+        description={post.description}
+        // imageUrl={post.pictures?.[0]?.url}
+        imageUrl={post.picture}
+        t={(key) => key}
+        handleModalToggle={toggleModal}
+      />
+    </Link>
+  ))
+) : (
+  <p>No hay mascotas disponibles.</p>
+)}
     </div>
     </>
   );
