@@ -1,6 +1,8 @@
+//Login.jsx
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useUser } from '../hooks/useUser';
+import { usePetData } from "../hooks/usePetData";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { useTranslation } from "react-i18next";
@@ -16,6 +18,7 @@ import Header from "../components/ui/Header";
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { petData, setPetData } = usePetData();
   const schema = yup.object().shape({
     username: yup.string().required(t("usernameRequired")),
     password: yup.string().required(t("passwordRequired")),
@@ -54,15 +57,24 @@ const Login = () => {
 
         setData({...data, ...config.data});
         login(data);
+        const updatedData = {
+        ...petData,
+        id: profile.id
+        }
+        setPetData(updatedData);
 
         toast.success(t("loginSuccess"));
-        navigate("/feed");
-      } else {
+        if(profile.role === "ADMINISTRATOR") {
+          navigate("/admin");
+        }
+        else{
+          navigate("/feed");
+        }
 
-        toast.error(t("loginError"));
+      } else {
+        toast.error(t("incorrectLogin"));
       }
     } catch (error) {
-
       console.error(error);
       toast.error(t("loginError"));
     }

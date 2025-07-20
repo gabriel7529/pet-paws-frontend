@@ -42,6 +42,7 @@ const Menu = ({ isOpenMenu, toggleMenu }) => {
   ];
 
   const handleLogout = () => {
+    localStorage.clear();
     logout();
     navigate("/login");
   };
