@@ -1,10 +1,17 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "../../hooks/useWindowsSize";
+import { getTitleHeader } from "../../helpers/getTitleHeader";
+import { useTranslation } from "react-i18next";
 
-const Header = ({ title, toggleMenu }) => {
+const AlternateHeader = ({ title, toggleMenu }) => {
   const navigate = useNavigate();
   const { width } = useWindowSize();
+  const { t } = useTranslation();
+  const contentTitle = getTitleHeader(title);
+  const handleBack = () => {
+      navigate(-1);
+  };
   const backSVG = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -55,12 +62,12 @@ const Header = ({ title, toggleMenu }) => {
   );
   return (
     <header className="bg-custom-50 text-custom-350 p-4 flex justify-between items-center border-b-custom-200 border-b-2">
-      <button className="text-custom-50" onClick={() => width>768? navigate("/feed") : toggleMenu()}>
+      <button className="text-custom-50" onClick={() => width>768? handleBack() : toggleMenu()}>
         {/* Ícono de menú para móvil */}
         {width > 768 ? backSVG : menuSVG}
       </button>
-      <h1 className="text-xl m-auto">{title}</h1>
-      <button className="text-custom-50" onClick={() => navigate("/feed")}>
+      <h1 className="text-xl m-auto">{t(contentTitle)}</h1>
+      <button className="text-custom-50" onClick={() => width > 768? handleBack() : handleBack()}>
         {/* Ícono de menú para móvil */}
         {width > 768 ? null : cancelSVG}
       </button>
@@ -68,9 +75,9 @@ const Header = ({ title, toggleMenu }) => {
   );
 };
 
-Header.propTypes = {
+AlternateHeader.propTypes = {
   title: PropTypes.string,
   toggleMenu: PropTypes.func,
 };
 
-export default Header;
+export default AlternateHeader;

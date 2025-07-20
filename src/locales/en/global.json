@@ -212,5 +212,26 @@
   "errorUpdatingPhoto": "Error updating photo",
   "updatedIncorrectly": "Error, the password is not correct",
   "myMessage": "My messages",
-  "sharedMessage": "Send message"
+  "sharedMessage": "Send message",
+  "selectChat": "Select a chat",
+  "seeProfile": "See profile",
+  "addInfoPet": "Add information",
+  "createPostPet": "Create Post",
+  "addStatePet": "Add state",
+  "addLocationPet": "Add location",
+  "addTagPet": "Add tags",
+  "namePet": "Name",
+  "speciesPet": "Species",
+  "approximateAgePet": "Approximate age",
+  "approximateDate": "Approximate date of disappearance or appearance",
+  "registeLocation": "Register marked location",
+  "saveLocation": "Save location",
+  "loadingText": "Loading...",
+  "lostPet": "Lost",
+  "foundPet": "Found",
+  "adoptionPet": "In Adoption",
+  "adoptedPet": "Adopted",
+  "questionForState": "What is the current status?",
+  "insertTagsLabel": "Place your labels here"
+
 }
