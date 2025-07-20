@@ -6,20 +6,18 @@ import i18n from './i18n.jsx'
 
 import { useCurrentUser } from './hooks/useCurrentUser.jsx';
 import { BrowserRouter } from 'react-router-dom';
-import Footer from './components/template/Footer.jsx';
 
 function App() {
   const current_user=useCurrentUser();
 
   return (
     <>
-      <div className="App bg-white">
+      <div className="App bg-white min-h-screen pb-[70px]">
         <I18nextProvider i18n={i18n}>
           <PetContext.Provider value={{current_user}}>
             <div>
                 <BrowserRouter>
                   <MainRouter/>
-                  <Footer></Footer>
                 </BrowserRouter>
             </div>
           </PetContext.Provider>

@@ -84,6 +84,24 @@
           "url": "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=pexels-pixabay-617278.jpg&fm=jpg"
         }
       ]
+    },
+    {
+      "id": 5,
+      "name": "",
+      "pet_type": "Perro",
+      "pet_gender": "Macho",
+      "pet_description": "Hola ",
+      "pet_size": "Pequeño",
+      "pet_age": "Cachorro",
+      "date_lost": "2024-10-08T17:18",
+      "reward": "",
+      "user_id": null,
+      "pictures": [
+        {
+          "id": 1,
+          "url": "https://res.cloudinary.com/dwkizli4g/image/upload/v1728685152/jzzki82jyoym3lgycykg.jpg"
+        }
+      ]
     }
   ],
   "comments": [
