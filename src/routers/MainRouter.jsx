@@ -22,6 +22,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminPage from "../views/AdminPage.jsx";
 import AccessDenied from "../views/AccessDenied.jsx";
 import ChatInterface from "../views/chat/ChatInterface.jsx";
+import AlternateHeader from "../components/Settings/Header.jsx";
 
 
 export const MainRouter = () => {
@@ -35,13 +36,23 @@ export const MainRouter = () => {
     "/admin",
     "/settings",
     "/access-denied",
+    "/"
   ];
+
+  const alternateHeaderRoutes = ["/chats", "/post/map", "/settings", "/post/info", "/post", "/post/tag", "/post/state"]
+
+
   return (
     <>
       <PetProvider>
         <Toaster richColors expand={true} />
-        {!hideHeaderRoutes.includes(location.pathname) && <Header />}
-
+        {!hideHeaderRoutes.includes(location.pathname) &&
+          (alternateHeaderRoutes.includes(location.pathname) ? (
+            <AlternateHeader title={location.pathname} />
+          ) : (
+            <Header />
+          ))
+        }
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
@@ -49,7 +60,7 @@ export const MainRouter = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/access-denied" element={<AccessDenied />} />
           <Route element={<ProtectedRoute allowedRoles={["ADMINISTRATOR"]} />}>
-            <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           </Route>
 
           <Route element={<ProtectedRoute allowedRoles={["USER"]} />}>
