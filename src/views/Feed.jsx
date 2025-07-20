@@ -1,17 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PublicForm from '../components/PublicForm';
+import { fetchPosts } from '../services/posts';
+import CardPostPet from '../components/DetailsPet/CardPostPet';
+import { Link } from 'react-router-dom';
 
 const Feed = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   const toggleModal = () => setModalOpen(!isModalOpen);
 
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      const postsData = await fetchPosts();
+      setPosts(postsData);
+    };
+    loadPosts();
+  }, []);
   return (
-    <div className="App">
+    <>
+    <div className="mx-10">
 
       <PublicForm show={isModalOpen} onClose={toggleModal}>
       </PublicForm>
     </div>
+
+
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {posts.map((post) => (
+        <Link to={`/pet/${post.id}`} key={post.id}>
+          <CardPostPet
+            name={post.name}
+            description={post.description}
+            imageUrl={post.pictures?.[0]?.url}
+            t={(key) => key}
+            handleModalToggle={toggleModal}
+          />
+        </Link>
+      ))}
+    </div>
+    </>
   );
 };
 

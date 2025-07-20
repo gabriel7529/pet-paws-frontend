@@ -7,15 +7,11 @@ const PetInfo = ({ name, size, age, location, dateLost, gender, imageUrl }) => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
   return (
-
     <>
-
-
     {/* Botón con el ícono de "info" para abrir el modal */}
     <button onClick={handleModalToggle} className="bg-transparent text-pink-500">
         <img src="/src/assets/img/Icons/info.svg" alt="info" className="w-8 h-8" />
@@ -23,7 +19,7 @@ const PetInfo = ({ name, size, age, location, dateLost, gender, imageUrl }) => {
 
     <Modal show={isModalOpen} onClose={handleModalToggle}>
       <Modal.Header className="bg-[#ff797d]">
-        {t("petInfoTitle")}
+       <p className='text-white'> {t("petInfoTitle")} </p>
 
       </Modal.Header>
 
