@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { createComment } from "../../services/comment";
 import PropTypes from "prop-types";
-
+import socket from "../../services/socket";
 
 const InputWithIcon = ({ postId, setComentarios }) => {
   const [texto, setTexto] = useState("");
@@ -12,26 +11,23 @@ const InputWithIcon = ({ postId, setComentarios }) => {
 
     // Crear el nuevo comentario
     const nuevoComentario = {
-      post_id: postId,
-      user_id: user.id,
-      text: texto,
+      postId: Number(postId)  ,
+      userId: user.id,
+      content: texto,
       timestamp: new Date().toISOString(),
     };
 
-    createComment(nuevoComentario)
-      .then((data) => {
+    socket.emit('newComment', nuevoComentario);
+    setComentarios((prevComentarios) => [...prevComentarios, nuevoComentario]);
 
-        setComentarios((prevComentarios) => [...prevComentarios, data]);
-        setTexto("");
-      })
-      .catch((error) => console.error("Error al agregar comentario:", error));
+    setTexto("");
   };
   return (
     <div className="flex items-center p-3 bg-red-100 rounded-9 w-full">
       <input
         type="text"
         placeholder="Escribe un comentario..."
-        className="bg-transparent flex-1 outline-none border-none	 text-red-500 placeholder-red-300"
+        className="bg-transparent flex-1 outline-none border-none	text-red-500 placeholder-red-300"
         value={texto}
         onChange={(e) => setTexto(e.target.value)}
       />
@@ -51,8 +47,7 @@ const InputWithIcon = ({ postId, setComentarios }) => {
 
 InputWithIcon.propTypes = {
   postId: PropTypes.string.isRequired,
-  setComentarios: PropTypes.func.isRequired
+  setComentarios: PropTypes.func
 
 };
-
 export default InputWithIcon;

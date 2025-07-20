@@ -1,4 +1,4 @@
-import { usePetData } from '../../contexts/post/PetProvider';
+import { usePetData } from '../../hooks/usePetData';
 
 
 const DescriptionBox = () => {
@@ -7,7 +7,7 @@ const DescriptionBox = () => {
   const handleDescriptionChange = (e) => {
     setPetData({
       ...petData,
-      pet_description: e.target.value,
+      description: e.target.value,
     });
   };
 
@@ -19,10 +19,10 @@ const DescriptionBox = () => {
         className="w-full p-2 border-2 border-[#FFB0A9] rounded-lg"
         maxLength="320"
         rows="4"
-        value={petData.pet_description}
+        value={petData.description}
         onChange={handleDescriptionChange}
       ></textarea>
-      <p className="text-right  text-sm text-[#FFB0A9]">{petData.pet_description.length}/320</p>
+      <p className="text-right  text-sm text-[#FFB0A9]">{petData.description.length || 0}/320</p>
       </div>
   );
 };

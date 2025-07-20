@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { usePetData } from '../../contexts/post/PetProvider';
+import { usePetData } from '../../hooks/usePetData';
 
 const ImageUploader = () => {
   const { petData, setPetData } = usePetData();
@@ -34,9 +34,9 @@ const ImageUploader = () => {
 
   // Cargar la imagen desde petData si existe
   useEffect(() => {
-    if (petData.pictures.length > 0) {
+    if (petData.petData.imageUrl.length > 0) {
       // Muestra la última imagen subida en el contexto petData
-      setImagePreview(petData.pictures[petData.pictures.length - 1].url);
+      setImagePreview(petData.petData.imageUrl);
     }
   }, [petData]);
 
@@ -54,13 +54,14 @@ const ImageUploader = () => {
         // Actualizar las imágenes en el contexto, guardando la imagen en la URL de Cloudinary
         const updatedPetData = {
           ...petData,
-          pictures: [...petData.pictures, { id: petData.pictures.length + 1, url: cloudinaryImageUrl }]
+          petData: {
+            ...petData.petData,
+            imageUrl: cloudinaryImageUrl, // Guardar la URL en imageUrl
+          }
         };
         setPetData(updatedPetData);
-        localStorage.setItem('petData', JSON.stringify(updatedPetData)); // Guardar en localStorage también
+        localStorage.setItem('petData', JSON.stringify(updatedPetData));
       }
-
-
     }
   };
 

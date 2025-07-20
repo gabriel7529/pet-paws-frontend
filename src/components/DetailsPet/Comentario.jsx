@@ -5,7 +5,7 @@ const Comentario = ({ avatar, nombre, tiempo, texto }) => {
     <div className="flex items-start p-4 my-6 bg-red-100 rounded-lg ">
       {/* Avatar */}
       <div className="w-12 h-12 bg-[#ffa4a4] rounded-full flex items-center justify-center mr-4">
-        <img src={avatar} alt="avatar" className="w-6 h-6" />
+        <img className="w-full h-full object-cover rounded-full" src={avatar} alt="avatar"  />
       </div>
 
       {/* Contenido */}
