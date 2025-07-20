@@ -1,21 +1,19 @@
 import Button from "../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/ui/Header";
 
 const LandingPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <div>
-      <div>
-        <h1>Pet Paws Public Header</h1>
-      </div>
-
+      <Header/>
       <div className="h-screen md:h-full bg-custom-50 flex items-center justify-center">
-        <div className="hidden w-full h-full max-w-md p-6 md:flex flex-col items-center justify-center m-12 md:max-w-md">
-          <div className="w-full max-h-lg aspect-square h-auto bg-custom-200 items-center justify-center">
+        <div className="hidden w-full h-full max-w-md md:flex flex-col items-center justify-center m-12 md:max-w-md">
+          <div className="w-full max-h-lg aspect-square h-auto bg-white items-center justify-center">
             <div className="text-custom-50 font-bold text-2xl text-center">
-              Aquí ira una imagen
+            <img src="/src/assets/img/foto_principal.png" className="w-screen p-1 my-20"></img>
             </div>
           </div>
         </div>
