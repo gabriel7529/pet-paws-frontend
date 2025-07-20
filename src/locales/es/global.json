@@ -77,6 +77,7 @@
   "loginTitle": "Inicia sesión",
   "login": "INGRESAR",
   "forgotPassword": "¿Olvidaste tu contraseña?",
+  "iHaveAccount": "Ya tengo una cuenta",
   "createAccount": "Crear nueva cuenta",
   "incorrectLogin": "Usuario o contraseña incorrectos",
   "createProfile": "Crear perfil",
@@ -139,5 +140,16 @@
   "emailRequired": "Correo electrónico es requerido",
   "emailError": "El correo electrónico no es válido",
   "phoneNumberRequired": "Número de celular es requerido",
-  "codeRequired": "Código es requerido"
+  "codeRequired": "Código es requerido",
+  "passwordRecoveryText": "Ingresa tu correo electrónico o número celular y te enviaremos un enlace para restablecer tu contraseña.",
+  "emailOrPhone": "Correo electrónico o número de celular",
+  "emailOrPhoneRequired": "Correo electrónico o número de celular es requerido",
+  "emailOrPhoneInvalid": "Correo electrónico o número de celular es inválido",
+  "send" : "Enviar",
+  "cantChangePassword" : "¿No puedes cambiar tu contraseña?",
+  "enterNewPassword": "Ingresa tu nueva contraseña",
+  "verificationCodeSent": "Código de verificación enviado",
+  "userNotExists": "El usuario no existe",
+  "landing.title": "¡Ayuda a cambiar vidas!",
+  "landing.subtitle": "Adopta o encuentra a tu amigo perdido."
 }

@@ -78,6 +78,7 @@
   "login": "LOGIN",
   "forgotPassword": "Forgot your password?",
   "createAccount": "Create an account",
+  "iHaveAccount": "I have an account",
   "incorrectLogin": "Incorrect user or password",
   "createProfile": "Create Profile",
   "enterFullName": "Enter your first and last name",
@@ -139,5 +140,16 @@
   "emailRequired": "Email is required",
   "emailError": "The email is not valid",
   "phoneNumberRequired": "Phone number is required",
-  "codeRequired": "Code is required"
+  "codeRequired": "Code is required",
+  "passwordRecoveryText": "Enter your email or phone number and we will send you a link to reset your password.",
+  "emailOrPhone": "Email or phone number",
+  "emailOrPhoneRequired": "Email or phone number is required",
+  "emailOrPhoneInvalid": "Email or phone number is invalid",
+  "send": "Send",
+  "cantChangePassword": "Can't change your password?",
+  "enterNewPassword": "Enter your new password",
+  "verificationCodeSent": "Verification code sent",
+  "userNotExists": "User does not exist",
+  "landing.title": "Help change lives!",
+  "landing.subtitle": "Find your pet or help find someone else's"
 }
