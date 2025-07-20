@@ -40,7 +40,7 @@ const SavePost = ({post, pos_x, pos_y}) => {
     right: `${pos_y}px`,
   };
 
-  const classes = `absolute bg-transparent z-10 w-[35px] hover:cursor-pointer`;
+  const classes = `absolute bg-transparent z-5 w-[35px] hover:cursor-pointer`;
 
   return (
     <div

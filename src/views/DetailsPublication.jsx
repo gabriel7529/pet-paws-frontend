@@ -18,8 +18,8 @@ const DetailsPublication = () => {
   }
 
   return (
-      <div className=" flex justify-center flex w-full h-3/4 ">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 ">
+      <div className=" flex justify-around flex w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <PetDescription
             id={id}
             description={post.description}
@@ -28,7 +28,6 @@ const DetailsPublication = () => {
             imageUser={user.avatar}  className="flex-grow"
             postData ={post}
           />
-          {/*<SavePost post={post} pos_x={300} pos_y={50}/>*/}
           <SectionCommets postId={id} />
         </div>
       </div>
