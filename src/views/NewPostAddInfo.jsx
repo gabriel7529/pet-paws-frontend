@@ -1,4 +1,4 @@
-import { usePetData } from '../contexts/post/PetProvider';
+import { usePetData } from '../hooks/usePetData';
 import FormSelect from '../components/PostPet/AddInfo/FormSelect';
 import FormField from '../components/FormField';
 import ContinueButton from '../components/PostPet/StatePet/ContinueButton';
@@ -8,15 +8,62 @@ const NewPostAddInfo = () => {
 
   const { petData, setPetData } = usePetData();
 
+  const languageMap = {
+    petType: {
+      'DOG': 'Perro',
+      'CAT': 'Gato',
+      'BIRD': 'Pájaro',
+      'RABBIT': 'Conejo',
+      'OTHER': 'Otro',
+      'Perro': 'DOG',
+      'Gato': 'CAT',
+      'Pájaro': 'BIRD',
+      'Conejo': 'RABBIT',
+      'Otro': 'OTHER',
+    },
+    gender: {
+      'MALE': 'Macho',
+      'FEMALE': 'Hembra',
+      'Macho': 'MALE',
+      'Hembra': 'FEMALE',
+    },
+    age: {
+      'PUPPY': 'Cachorro',
+      'YOUNG': 'Joven',
+      'ADULT': 'Adulto',
+      'SENIOR': 'Anciano',
+      'Cachorro': 'PUPPY',
+      'Joven': 'YOUNG',
+      'Adulto': 'ADULT',
+      'Anciano': 'SENIOR',
+    },
+    size: {
+      'SMALL': 'Pequeño',
+      'MEDIUM': 'Mediano',
+      'LARGE': 'Grande',
+      'Pequeño': 'SMALL',
+      'Mediano': 'MEDIUM',
+      'Grande': 'LARGE',
+    },
+  };
+
+  const getDisplayValue = (section, value) => {
+    return languageMap[section][value] || value;
+  };
+
   const handleSubmit = () => {
     console.log(petData);
   };
 
-  const handleChange = (key, value) => {
-    setPetData({
+  const handleChange = (section, key, value) => {
+    const updatedData = {
       ...petData,
-      [key]: value,
-    });
+      [section]: {
+        ...petData[section],
+        [key]: value.toUpperCase(),
+      },
+    };
+    setPetData(updatedData);
   };
 
   return (
@@ -25,35 +72,65 @@ const NewPostAddInfo = () => {
         <FormField
           label="Nombre"
           type="text"
-          value={petData.pet_name} // Usamos el valor del contexto
-          onChange={(e) => handleChange('name', e.target.value)}
+          value={petData.petData.name} // Usamos el valor del contexto
+          onChange={(e) => handleChange('petData', 'name', e.target.value)}
           placeholder='Nombre de la mascota'
         />
         <FormSelect
           label="Especie"
-          value={petData.pet_type} // Usamos el valor del contexto
-          onChange={(e) => handleChange('pet_type', e.target.value)}
+          value={getDisplayValue('petType', petData.petData.petType)} // Usamos el valor del contexto
+          onChange={(e) => {
+            const valueMap = {
+              'Perro': 'DOG',
+              'Gato': 'CAT',
+              'Pájaro': 'BIRD',
+              'Conejo': 'RABBIT',
+              'Otro': 'OTHER',
+            };
+            handleChange('petData', 'petType', valueMap[e.target.value]);
+          }}
           options={['Perro', 'Gato', 'Pájaro', 'Conejo', 'Otro']}
         />
 
         <FormSelect
           label="Sexo"
-          value={petData.pet_gender} // Usamos el valor del contexto
-          onChange={(e) => handleChange('pet_gender', e.target.value)}
+          value={getDisplayValue('gender',petData.petData.gender)} // Usamos el valor del contexto
+          onChange={(e) => {
+            const valueMap = {
+              'Macho': 'MALE',
+              'Hembra': 'FEMALE',
+            };
+            handleChange('petData', 'gender', valueMap[e.target.value]);
+          }}
           options={['Macho', 'Hembra']}
         />
 
         <FormSelect
           label="Edad aproximada"
-          value={petData.pet_age} // Usamos el valor del contexto
-          onChange={(e) => handleChange('pet_age', e.target.value)}
+          value={getDisplayValue('age',petData.petData.age)} // Usamos el valor del contexto
+          onChange={(e) => {
+            const valueMap = {
+              'Cachorro': 'PUPPY',
+              'Joven': 'YOUNG',
+              'Adulto': 'ADULT',
+              'Anciano': 'SENIOR',
+            };
+            handleChange('petData', 'age', valueMap[e.target.value]);
+          }}
           options={['Cachorro', 'Joven', 'Adulto', 'Anciano']}
         />
 
         <FormSelect
           label="Tamaño"
-          value={petData.pet_size} // Usamos el valor del contexto
-          onChange={(e) => handleChange('pet_size', e.target.value)}
+          value={getDisplayValue('size',petData.petData.size)} // Usamos el valor del contexto
+          onChange={(e) => {
+            const valueMap = {
+              'Pequeño': 'SMALL',
+              'Mediano': 'MEDIUM',
+              'Grande': 'LARGE',
+            };
+            handleChange('petData', 'size', valueMap[e.target.value]);
+          }}
           options={['Pequeño', 'Mediano', 'Grande']}
         />
 
@@ -61,7 +138,7 @@ const NewPostAddInfo = () => {
               label="Fecha aproximada de desaparición o aparición"
               type="datetime-local"
               value={petData.date_lost}
-              onChange={(e) => handleChange('date_lost', e.target.value)}
+              onChange={(e) => handleChange('', 'date_lost', e.target.value)}
         />
         <ContinueButton text="Continuar" onClick={handleSubmit} />
       </form>

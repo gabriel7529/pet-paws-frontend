@@ -6,18 +6,17 @@ import PublishButton from "../components/PostPet/PublishButton";
 const NewPostPet = () => {
 
   return (
-    <div className="max-w-[375px] md:max-w-[1440px] mx-auto p-4 bg-white-200 rounded-lg">
-
+    <div className="mx-auto p-4 bg-white-200 rounded-lg">
       {/* Contenedor para la vista en dispositivos grandes */}
-      <div className="flex flex-col md:flex-row justify-between">
-        {/* Columna Izquierda - Imagen y Descripción */}
-        <div className="md:w-4/5 p-4 flex flex-col ">
-          <ImageUploader />
+      <div className="flex flex-col md:flex-row ">
+        <div className="md:w-1/2 p-8 flex flex-col ">
+          <div className="w-50 h-50 relative overflow-hidden rounded-lg">
+            <ImageUploader />
+          </div>
           <DescriptionBox/>
-
         </div>
 
-      <div className="md:w-1/2 p-4 space-y-4 flex flex-col">
+      <div className="md:w-1/2 p-8 space-y-6 flex flex-col">
         <ActionButton
           text="Agregar información"
           icon="/src/assets/img/Icons/info.svg"

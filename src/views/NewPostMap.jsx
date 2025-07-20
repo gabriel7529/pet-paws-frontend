@@ -2,7 +2,7 @@ import { useEffect, useRef, useContext, useState } from "react";
 import mapboxgl from 'mapbox-gl';
 import PlacesProvider from "../contexts/places/PlacesProvider";
 import PlacesContext from "../contexts/places/PlacesContext";
-import { usePetData } from '../contexts/post/PetProvider';
+import { usePetData } from '../hooks/usePetData';
 import { useNavigate } from 'react-router-dom';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ2FicmllbDI5LXMiLCJhIjoiY20yMnZvYnExMDJwNzJqcTV3d3J3cmUxdSJ9.fA3z9inzGxKvS2GC_rH20g';
@@ -16,47 +16,53 @@ const NewPostMap = () => {
   const [markerLocation, setMarkerLocation] = useState(userLocation); // Almacena la ubicación actual del marcador
 
   useEffect(() => {
-    if (!userLocation || isLoading) return;
 
-    // Solo inicializamos el mapa si aún no existe
-    if (!mapRef.current) {
-      mapRef.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: petData.location ? [petData.location.lng, petData.location.lat] : userLocation,
-        zoom: 14,
-      });
+    if (!userLocation || isLoading || mapRef.current) return;
 
-      // Crear un marcador arrastrable
-      const marker = new mapboxgl.Marker({
-        draggable: true,
-      })
-        .setLngLat(petData.location || userLocation)
-        .setPopup(new mapboxgl.Popup().setText("Ubicación de la mascota"))
-        .addTo(mapRef.current);
+    console.log(petData.sightingData);
 
-      // Actualizar la ubicación del marcador cuando se arrastre
-      marker.on('dragend', () => {
-        const { lng, lat } = marker.getLngLat();
-        setMarkerLocation([lng, lat]); // Actualizar el estado temporal con la nueva ubicación
-      });
-    }
+    mapRef.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: petData.sightingData.latitude != 0 ? [petData.sightingData.longitude, petData.sightingData.latitude] : [userLocation[0],userLocation[1]],
+      zoom: 14,
+    });
 
-  }, [userLocation, isLoading, petData.location]);
+    const marker = new mapboxgl.Marker({
+      draggable: true,
+    })
+      .setLngLat(petData.sightingData.latitude != 0  ? [petData.sightingData.longitude, petData.sightingData.latitude] : userLocation)
+      .setPopup(new mapboxgl.Popup().setText("Ubicación de la mascota"))
+      .addTo(mapRef.current);
+
+    // Actualiza la ubicación del marcador cuando se arrastra
+    marker.on('dragend', () => {
+      const { lng, lat } = marker.getLngLat();
+      setMarkerLocation([lng, lat]);
+    });
+  }, [userLocation, isLoading, petData.sightingData]);
 
   // Función para confirmar y guardar la ubicación en petData
   const handleSaveLocation = () => {
     setPetData({
       ...petData,
-      location: { lng: markerLocation[0], lat: markerLocation[1] },
+      sightingData: {
+        ...petData.sightingData,
+        longitude: markerLocation[0],
+        latitude: markerLocation[1],
+      },
     });
-    alert("Ubicación guardada correctamente"+ petData.location.lng);
+    alert("Ubicación guardada correctamente");
     navigate('/post');
   };
 
   return (
     <div>
+      {isLoading ? (
+      <p>Cargando mapa...</p> 
+    ) : (
       <div ref={mapContainer} className="w-full h-screen" />
+    )}
       {markerLocation && (
         <div className="absolute bottom-20 left-10 bg-white p-2 rounded">
           <p>Latitud: {markerLocation[1]}</p>

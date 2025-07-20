@@ -1,16 +1,30 @@
 import { useState } from 'react';
+import { usePetData } from '../hooks/usePetData';
 import StateOption from '../components/PostPet/StatePet/StateOption';
 import ContinueButton from '../components/PostPet/StatePet/ContinueButton';
+
+
 const NewPostState = () => {
-  const [selectedState, setSelectedState] = useState('Perdido');
+
+  const { petData, setPetData } = usePetData();
+  const petState = petData.petData.state ;
+  const [selectedState, setSelectedState] = useState(petState || 'Perdido');
+  
 
   const handleOptionChange = (state) => {
     setSelectedState(state);
   };
 
   const handleContinue = () => {
-    console.log("Estado seleccionado:", selectedState);
-
+    //console.log("Estado seleccionado:", selectedState);
+    const updatedPetData = {
+      ...petData,
+      petData: {
+        ...petData.petData,
+        state: selectedState,
+      },
+    };
+    setPetData(updatedPetData);
   };
 
   return (
