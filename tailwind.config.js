@@ -7,7 +7,9 @@ export default {
     extend: {
       colors: {
         custom: {
+
           50: "#FFFFFF",
+          75: "#FFEBEA",
           100: "#FFE4E2",
           150: "#FFB0A9",
           200: "#FF797D",

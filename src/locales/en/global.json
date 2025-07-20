@@ -156,6 +156,7 @@
   "userNotExists": "User does not exist",
   "landing.title": "Help change lives!",
   "landing.subtitle": "Find your pet or help find someone else's",
+  "titleFormEdit": "Edit your post",
   "settings.title": "Settings",
   "settings.user.title": "User",
   "settings.user.changePhoto": "Change photo",
@@ -209,5 +210,7 @@
   "errorDeletingPhoto": "Error deleting photo",
   "photoUpdated": "Photo updated",
   "errorUpdatingPhoto": "Error updating photo",
-  "updatedIncorrectly": "Error, the password is not correct"
+  "updatedIncorrectly": "Error, the password is not correct",
+  "myMessage": "My messages",
+  "sharedMessage": "Send message"
 }

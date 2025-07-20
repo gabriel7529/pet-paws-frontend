@@ -9,99 +9,46 @@
       "address": "1234 Main St",
       "username": "jdoe",
       "password": "123456",
-      "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero."
+      "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
+      "gender": ""
+    }
+  ],
+  "saved_posts": [
+    {
+      "user_id": 1,
+      "post_id": 1,
+      "created_at": "2024-10-28T01:40:44.744Z",
+      "id": 1
     }
   ],
   "posts": [
     {
-      "id": 1,
-      "name": "Pet Name 1",
-      "pet_type": "Dog",
-      "pet_gender": "male",
-      "pet_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-      "pet_size": "small",
-      "pet_age": "young",
-      "date_lost": "2022-12-01",
-      "reward": "$100",
-      "user_id": 1,
-      "pictures": [
-        {
-          "id": 1,
-          "url": "https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?cs=srgb&dl=pexels-wildlittlethingsphoto-2253275.jpg&fm=jpg"
-        }
-      ]
+      "name": "firma",
+      "pet_type": "CAT",
+      "pet_gender": null,
+      "pet_description": "Pweo",
+      "pet_size": "MEDIUM",
+      "pet_age": "YOUNG",
+      "latitude": null,
+      "longitude": null,
+      "picture": "https://res.cloudinary.com/dwkizli4g/image/upload/v1730057031/evvt4gifzpnw0ml8o434.jpg",
+      "pet_state": "LOST",
+      "date_lost": "2024-10-14T19:24:00.000Z",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Pet Name 2",
-      "pet_type": "Cat",
-      "pet_gender": "female",
-      "pet_description": "Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere.",
-      "pet_size": "medium",
-      "pet_age": "adult",
-      "date_lost": "2023-01-15",
-      "reward": "$50",
-      "user_id": 1,
-      "pictures": [
-        {
-          "id": 2,
-          "url": "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=pexels-pixabay-617278.jpg&fm=jpg"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Pet Name 3",
-      "pet_type": "Bird",
-      "pet_gender": "male",
-      "pet_description": "Donec sollicitudin molestie malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit.",
-      "pet_size": "small",
-      "pet_age": "adult",
-      "date_lost": "2023-03-10",
-      "reward": "$75",
-      "user_id": 1,
-      "pictures": [
-        {
-          "id": 3,
-          "url": "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=pexels-pixabay-617278.jpg&fm=jpg"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "name": "Pet Name 4",
-      "pet_type": "Rabbit",
-      "pet_gender": "female",
-      "pet_description": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus magna justo, lacinia eget.",
-      "pet_size": "small",
-      "pet_age": "young",
-      "date_lost": "2023-05-22",
-      "reward": "$200",
-      "user_id": 1,
-      "pictures": [
-        {
-          "id": 4,
-          "url": "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=pexels-pixabay-617278.jpg&fm=jpg"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "name": "",
-      "pet_type": "Perro",
-      "pet_gender": "Macho",
-      "pet_description": "Hola ",
-      "pet_size": "Pequeño",
-      "pet_age": "Cachorro",
-      "date_lost": "2024-10-08T17:18",
-      "reward": "",
-      "user_id": null,
-      "pictures": [
-        {
-          "id": 1,
-          "url": "https://res.cloudinary.com/dwkizli4g/image/upload/v1728685152/jzzki82jyoym3lgycykg.jpg"
-        }
-      ]
+      "name": "firma 2",
+      "pet_type": "CAT",
+      "pet_gender": null,
+      "pet_description": "Pweo",
+      "pet_size": "MEDIUM",
+      "pet_age": "YOUNG",
+      "latitude": null,
+      "longitude": null,
+      "picture": "https://res.cloudinary.com/dwkizli4g/image/upload/v1730057031/evvt4gifzpnw0ml8o434.jpg",
+      "pet_state": "LOST",
+      "date_lost": "2024-10-14T19:24:00.000Z",
+      "id": 1
     }
   ],
   "comments": [
