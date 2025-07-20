@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 const InputWithIcon = ({ postId, setComentarios }) => {
   const [texto, setTexto] = useState("");
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +13,7 @@ const InputWithIcon = ({ postId, setComentarios }) => {
     // Crear el nuevo comentario
     const nuevoComentario = {
       post_id: postId,
-      user_id: 1, // Aquí deberías poner el id del usuario autenticado
+      user_id: user.id,
       text: texto,
       timestamp: new Date().toISOString(),
     };
@@ -49,7 +50,7 @@ const InputWithIcon = ({ postId, setComentarios }) => {
 };
 
 InputWithIcon.propTypes = {
-  postId: PropTypes.number.isRequired,
+  postId: PropTypes.string.isRequired,
   setComentarios: PropTypes.func.isRequired
 
 };

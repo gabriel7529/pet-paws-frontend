@@ -7,7 +7,6 @@ import FormField from "./FormField";
 
 export function ModalFormulario() {
 
-
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
   const { t } = useTranslation();
@@ -51,13 +50,33 @@ export function ModalFormulario() {
   };
 
   const handleSubmit = () => {
+    event.preventDefault();
+     // Crear el objeto con los datos mapeados a la estructura correcta
+    const dataToSend = {
+      id: 4,  // Asigna un ID si es necesario
+      name: formData.name,
+      pet_type: formData.tipoAnimal,
+      pet_gender: formData.genero === "macho" ? "male" : "female",
+      pet_description: formData.caracteristicas || "No description provided.",
+      pet_size: formData.tamano,
+      pet_age: formData.edad === "2" ? "young" : "adult",
+      date_lost: formData.diaHora.split("T")[0],
+      reward: `$${formData.recompensa}`,
+      user_id: 1,
+      pictures: [
+        {
+          id: 4,
+          url: formData.foto || "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?cs=srgb&dl=pexels-pixabay-617278.jpg&fm=jpg"
+        }
+      ]
+    };
     // Aquí se enviará el formulario a la API usando fetch
     fetch('http://localhost:8080/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(dataToSend),
     })
     .then(response => response.json())
     .then(() => {

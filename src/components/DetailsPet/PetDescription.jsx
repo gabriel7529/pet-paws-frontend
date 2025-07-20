@@ -19,7 +19,7 @@ const PetDescription = ({ id, name, description, imageUrl}) => {
   return (
     <>
     <div className="container mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
 
       <CardPostPet
             name={name}
@@ -60,7 +60,7 @@ const PetDescription = ({ id, name, description, imageUrl}) => {
 };
 
 PetDescription.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string
