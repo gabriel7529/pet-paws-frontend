@@ -1,13 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
 
 const Footer = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { logout } = useUser();
 
   const handleLogout = () => {
     console.log('Logout clicked');
+    logout();
     navigate('/login');
+
   };
 
   return (

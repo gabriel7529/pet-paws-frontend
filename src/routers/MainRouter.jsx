@@ -17,6 +17,7 @@ import NewPostAddInfo from "../views/NewPostAddInfo.jsx";
 import NewPostMap from "../views/NewPostMap.jsx";
 import { PetProvider } from "../contexts/post/PetProvider";
 import LandingPage from "../views/LandingPage.jsx";
+import Settings from "../views/Settings.jsx";
 
 export const MainRouter = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ export const MainRouter = () => {
     "/login",
     "/passwordrecovery",
     "/landingpage",
+    "/settings",
   ];
   return (
     <>
@@ -83,6 +85,7 @@ export const MainRouter = () => {
             </PetProvider>
           }
         />
+        <Route path="/settings" element={<Settings/>} />
       </Routes>
       {!hideHeaderRoutes.includes(location.pathname) && <Footer />}
     </>
