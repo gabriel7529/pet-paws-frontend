@@ -1,7 +1,6 @@
 import Button from "../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/ui/Header";
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -9,7 +8,7 @@ const LandingPage = () => {
   return (
     <div>
       <div>
-        <Header />
+        <h1>Pet Paws Public Header</h1>
       </div>
 
       <div className="h-screen md:h-full bg-custom-50 flex items-center justify-center">
