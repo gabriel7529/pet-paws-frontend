@@ -1,12 +1,13 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const userUrl= `${BASE_URL}/api/users/`;
 
 export async function fetchUsers() {
-  const response = await fetch(`${BASE_URL}/api/users/`);
+  const response = await fetch(`${userUrl}`);
   return response.json();
 }
 
 export async function fetchUser(id) {
-  const response = await fetch(`${BASE_URL}/api/users/${id}`);
+  const response = await fetch(`${userUrl}${id}`);
   return response.json();
 }
 
@@ -16,7 +17,7 @@ export async function fetchUserByEmail(email) {
 }
 
 export async function updateUser(id, updatedUser) {
-  const response = await fetch(`${BASE_URL}/api/users/${id}`, {
+  const response = await fetch(`${userUrl}${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -30,7 +31,7 @@ export async function updateUser(id, updatedUser) {
 }
 
 export async function patchUser(id, updatedFields) {
-  const response = await fetch(`${BASE_URL}/api/users/${id}`, {
+  const response = await fetch(`${userUrl}${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -55,23 +56,23 @@ export async function loginUser(username, password) {
     }),
   });
 
+  if(response.status == "400" ){
+    return null;
+  }
   if (!response.ok) {
     throw new Error(`Network response was not ok: ${response.statusText}`);
   }
-
   const data = await response.json();
-
   // Guardar el token JWT en localStorage
   localStorage.setItem("token", data.token);
-
-  console.log("data", data);
+  //console.log("data", data);
 
   // Retornar el perfil del usuario
   return data.profile;
 }
 
 export async function createUser(user) {
-  const response = await fetch(`${BASE_URL}/api/users`, {
+  const response = await fetch(`${userUrl}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -87,7 +88,7 @@ export async function createUser(user) {
 }
 
 export async function getUserByEmail(email) {
-  const url = new URL(`${BASE_URL}/api/users`);
+  const url = new URL(`${userUrl}`);
 
   const response = await fetch(url);
 
@@ -164,3 +165,22 @@ export const activateAccount = async (token) => {
     throw error;
   }
 };
+
+export const fetchLoggedUser= async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (!response.data) {
+      throw new Error("Error al obtener el usuario logueado");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error en fetchLoggedUser:", error);
+    throw error;
+  }
+}
