@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react';
-import PublicForm from '../components/PublicForm';
+
 import { fetchPosts } from '../services/posts';
 import CardPostPet from '../components/DetailsPet/CardPostPet';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button } from "flowbite-react"; // Asegúrate de importar Button desde flowbite
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
+  const { t } = useTranslation();
 
   const toggleModal = () => setModalOpen(!isModalOpen);
+  const navigate = useNavigate(); // Inicializar useNavigate
+
+  const handleRedirect = () => {
+    navigate("/post");
+  }
 
 
   useEffect(() => {
@@ -22,8 +31,9 @@ const Feed = () => {
     <>
     <div className="mx-10">
 
-      <PublicForm show={isModalOpen} onClose={toggleModal}>
-      </PublicForm>
+    <Button className="bg-[#fca5a5] text-black" onClick={handleRedirect}>
+        {t("functionButton")}
+      </Button>
     </div>
 
 
@@ -34,7 +44,8 @@ const Feed = () => {
           <CardPostPet
             name={post.name}
             description={post.description}
-            imageUrl={post.pictures?.[0]?.url}
+            //imageUrl={post.pictures?.[0]?.url}
+            imageUrl={post.picture}
             t={(key) => key}
             handleModalToggle={toggleModal}
           />
@@ -45,4 +56,6 @@ const Feed = () => {
   );
 };
 
+
 export default Feed;
+
