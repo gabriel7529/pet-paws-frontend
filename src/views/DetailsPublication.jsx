@@ -23,7 +23,8 @@ const DetailsPublication = () =>{
           id={id}
           description={post.pet_description}
           name={post.name || "Desconocido"}
-          imageUrl={post.pictures?.[0]?.url}
+          imageUrl={post.picture}
+          //imageUrl={post.pictures?.[0]?.url}
       />
     </div>
   </div>

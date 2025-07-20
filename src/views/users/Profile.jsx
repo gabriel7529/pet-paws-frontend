@@ -117,7 +117,8 @@ function Profile() {
               <div key={post.id} className='aspect-square'>
                 <img
                   className='object-cover h-full w-full rounded-2xl'
-                  src={post.pictures?.[0]?.url || 'default.jpg'}
+                  src={post.picture}
+                  //src={post.pictures?.[0]?.url || 'default.jpg'}
                   alt={post.name}
                 />
               </div>

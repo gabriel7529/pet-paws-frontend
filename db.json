@@ -111,6 +111,12 @@
       "text": "Hola",
       "timestamp": "2024-10-04T22:52:30.118Z",
       "id": 1
+    },
+    {
+      "post_id": "cm2fbo3cr000dz4dvivk5mcc9",
+      "text": "Hola mascota",
+      "timestamp": "2024-10-18T22:49:43.691Z",
+      "id": 2
     }
   ]
 }

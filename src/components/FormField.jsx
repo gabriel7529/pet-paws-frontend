@@ -10,7 +10,7 @@ const FormField = ({
   if (type === "radio") {
     return (
       <div className="flex items-center space-x-8 space-y-8">
-        <label className="block text-sm text-[#FF4146] font-medium ">{label}</label>
+        <label className="block text-sm text-[#FF4146] font-medium  ">{label}</label>
         {options.map((option, index) => (
           <div key={index} className="flex items-center">
             <input
@@ -46,11 +46,11 @@ const FormField = ({
 
   return (
     <div>
-      <label  className="block text-sm font-medium text-[#FF4146] my-4">{label}</label>
+      <label  className="block text-sm font-medium text-[#FF4146] my-4 ">{label}</label>
       <input
         type={type}
         placeholder={placeholder}
-        className="block w-full px-4 py-2 mt-1 text-sm border-2 border-[#FFB0A9] rounded-lg text-[#FF797D]"
+        className="block w-full px-4 py-2 mt-1 text-sm border-2 border-[#FFB0A9] rounded-lg text-[#FF797D]  placeholder-[#FF797D]"
         {...props}
       />
     </div>
