@@ -10,6 +10,6 @@ export const useGetUserPosts = (id) => {
       setPosts(posts);
     };
     fetchData();
-  }, [id]);
-  return {posts};
+  }, );
+  return { posts };
 }

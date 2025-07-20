@@ -1,12 +1,12 @@
 export const getUserLocation = () => {
     return new Promise((resolve, reject) => {
-        // Opciones para mejorar la precisión
+        console.log("ejecutandose")
+        
         const options = {
             enableHighAccuracy: true,
             timeout: 5000,
-            maximumAge: 0 
+            maximumAge: 0
         };
-
         navigator.geolocation.getCurrentPosition(
             ({ coords }) => {
                 const { latitude, longitude } = coords;
@@ -14,9 +14,9 @@ export const getUserLocation = () => {
             },
             (err) => {
                 console.error('Error obteniendo la geolocalización', err);
-                reject(err); // Rechazar la promesa con el error
+                reject(err);
             },
-            options // Pasa las opciones al método
+            options
         );
     });
 };

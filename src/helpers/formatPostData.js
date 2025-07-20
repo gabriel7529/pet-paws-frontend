@@ -7,6 +7,16 @@ const petTypeMap = {
   'Otro': 'OTHER',
 };
 
+const stateMap = {
+  'Perdido': 'LOST',
+  'Encontrado': 'FOUND',
+  'En Adopción': 'ADOPTION',
+  'Adoptado': 'ADOPTED',
+};
+
+
+
+/*
 const petAgeMap = {
   'Cachorro': 'PUPPY',
   'Joven': 'YOUNG',
@@ -23,28 +33,67 @@ const petSizeMap = {
 const petGender = {
   'Macho' : 'MALE',
   'Hembra' : 'FEMALE'
+}*/
+
+function getPetTypeKeyByValue(value) {
+  return Object.keys(petTypeMap).find(key => petTypeMap[key] === value) || 'mascota';
 }
 
 // Función para transformar los datos del frontend al formato de Prisma
 export function formatPostData(postData) {
-  delete postData.id; // Eliminar el id del post
-  delete postData.user_id; // Eliminar el id del usuario
-  delete postData.reward; // Eliminar el resto de propiedades
+  const { state, tags, petData, sightingData, ...rest } = postData;
+  const updatedState = stateMap[petData.state];
 
-  const { location, pictures, date_lost, ...rest } = postData;
+  // Generamos el título en base al estado y tipo de publicación
+  const title = updatedState === 'LOST'
+    ? `Se busca ${petData.name} mi ${getPetTypeKeyByValue(petData.type)}`
+    : state === 'ADOPTION'
+    ? `Se adopta ${petData.pet_name} mi ${getPetTypeKeyByValue(petData.type)}`
+    : '';
+    const formattedTags = Array.isArray(tags) ? tags.join(', ') : '';
 
-  const formattedData = {
-    ...rest,
-    latitude: location?.lat ?? null,
-    longitude: location?.lng ?? null,
-    picture: pictures?.[0]?.url ?? null,
-    pet_gender: petGender[postData.pet_gender] ?? null,
-    pet_state: 'LOST', // Valor por defecto para pet_status
-    pet_type: petTypeMap[postData.pet_type] || 'OTHER', // Asignar 'OTHER' como predeterminado
-    pet_age: petAgeMap[postData.pet_age] || 'ADULT', // Valor por defecto ADULT
-    pet_size: petSizeMap[postData.pet_size] || 'MEDIUM', // Valor por defecto MEDIUM
-    date_lost: new Date(date_lost).toISOString(), // Fecha actual
-  };
-
-  return formattedData;
+    console.log(updatedState);
+    return {
+      ...rest,
+      title,
+      tags: formattedTags,
+      state,
+      userId: postData.userId,
+      petData: {
+        ...petData,
+        state: updatedState,
+      },
+      sightingData: {
+        ...sightingData, 
+        latitude: location?.lat ?? 0,
+        longitude: location?.lng ?? 0,
+      }
+    };
 }
+
+export const formatData = (user) => {
+  let id = user ? user.id : 0;
+  let data = {
+    title: '',
+    description: '',
+    tags: '',
+    location: 'Mi casa',
+    state: 'LOST',
+    userId: id,
+    petData: {
+      name: ' ',
+      petType: '',
+      gender: '',
+      age: '',
+      size: '',
+      state: '',
+      imageUrl: '',
+      validated: true
+    },
+    sightingData: {
+        latitude: 0,
+        longitude: 0
+    }
+  }
+  return data;
+};
