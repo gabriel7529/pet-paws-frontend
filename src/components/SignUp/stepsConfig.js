@@ -8,7 +8,7 @@ export const steps = [
     subtitleKey: 'enterFullName',
     fields: [
       {
-        name: 'firstName',
+        name: 'name',
         labelKey: 'name',
         type: 'text',
         validation: Yup.string().required('nameRequired'),
@@ -61,8 +61,8 @@ export const steps = [
     subtitleKey: 'enterUsernameAndPass',
     fields: [
       {
-        name: 'username',
-        labelKey: 'username',
+        name: 'account',
+        labelKey: 'account',
         type: 'text',
         validation: Yup.string().required('usernameRequired'),
       },
@@ -123,7 +123,7 @@ export const steps = [
         labelKey: 'confirmationCode',
         type: 'text',
         validation: Yup.string()
-          .matches(/^\d{6}$/, 'errorCode')
+          .matches(/^\d{7}$/, 'errorCode')
           .required('codeRequired'),
       },
     ],

@@ -8,8 +8,8 @@ import { getValidationSchema } from "../components/SignUp/validationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormStep from "../components/SignUp/FormStep";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { createUser } from "../services/users";
+//import { useTranslation } from "react-i18next";
+import { createUser, activateAccount } from "../services/users";
 import { toast } from "sonner";
 
 const SignUp = () => {
@@ -20,12 +20,12 @@ const SignUp = () => {
   );
 };
 
-const validateCode = (value) => {
-  return value === "123456";
+const validateCode = (value, token) => {
+  return value === token;
 };
 
 const SignUpForm = () => {
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
 
   const { step, nextStep } = useContext(StepContext);
   const navigate = useNavigate();
@@ -35,47 +35,57 @@ const SignUpForm = () => {
     mode: "onTouched",
   });
 
-  const { getValues, setValue } = methods;
+  const { setValue } = methods;
 
   const onSubmit = async (data) => {
     if (step === 5) {
       //logica para enviar codigo de verificacion desde el correo
+      try {
+        data.birthDate = new Date(data.birthDate).toISOString();
+
+        const userData = { ...data };
+        delete userData.gender;
+        delete userData.code; // Eliminar código antes de crear el usuario
+
+        const createdUser = await createUser(userData);
+
+        // Guardar el token de activación en localStorage
+        localStorage.setItem("activationToken", createdUser.verificationToken);
+
+        toast.success("Usuario creado. Revisa tu correo para activar la cuenta.");
+        nextStep();
+      } catch (error) {
+        console.error(error);
+        toast.error("Error al crear el usuario.");
+      }
       nextStep(7);
     } else if (step === 6) {
       //logica para enviar codigo desde el telefono
       nextStep(7);
     } else if (step === 7) {
-      if (!data.email) data.email = "";
-      if (!data.phoneNumber) data.phoneNumber = "";
-      if (validateCode(data.code)) {
-        try {
-          const allData = getValues();
-          const userData = Object.entries(allData).reduce(
-            (acc, [key, value]) => {
-              if (key !== "code") {
-                acc[key] = value;
-              }
-              return acc;
-            },
-            {}
-          );
+      const activationToken = localStorage.getItem("activationToken");
 
-          // Llamamos a createUser para crear el nuevo usuario
-          await createUser(userData);
-          toast.success(t("signupSuccess"));
+      if (!activationToken) {
+        toast.error("No se encontró el token de activación.");
+        return;
+      }
+
+      if (validateCode(data.code, activationToken)) {
+        try {
+          await activateAccount(activationToken);
+
+          toast.success("Cuenta activada con éxito.");
           navigate("/login");
         } catch (error) {
           console.error(error);
-          toast.error(t("signupError"));
+          toast.error("Error al activar la cuenta.");
         }
       } else {
         setValue("code", "");
-        toast.error(t("errorCode"));
+        toast.error("Código de verificación incorrecto.");
       }
-    } else if (step < steps.length) {
-      nextStep();
     } else {
-      navigate("/login");
+      nextStep();
     }
   };
 

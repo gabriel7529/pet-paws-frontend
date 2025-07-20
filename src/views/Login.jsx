@@ -39,15 +39,21 @@ const Login = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const result = await loginUser(data.username, data.password);
-      if (result.length > 0) {
-        localStorage.setItem("user", JSON.stringify(result[0]));
+
+      const profile = await loginUser(data.username, data.password);
+
+      if (profile) {
+
+        localStorage.setItem("user", JSON.stringify(profile));
+
         toast.success(t("loginSuccess"));
-        navigate("/pet/1");
+        navigate("/feed");
       } else {
+
         toast.error(t("loginError"));
       }
     } catch (error) {
+
       console.error(error);
       toast.error(t("loginError"));
     }
