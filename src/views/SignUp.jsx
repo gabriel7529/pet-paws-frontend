@@ -35,7 +35,7 @@ const SignUpForm = () => {
     mode: "onTouched",
   });
 
-  const { getValues } = methods;
+  const { getValues, setValue } = methods;
 
   const onSubmit = async (data) => {
     if (step === 5) {
@@ -71,6 +71,7 @@ const SignUpForm = () => {
           );
         }
       } else {
+        setValue("code", "");
         toast.error(t("errorCode"));
       }
     } else if (step < steps.length) {
