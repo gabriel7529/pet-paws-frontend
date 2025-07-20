@@ -2,24 +2,36 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetUser } from '../../hooks/useGetUser';
 import { useGetUserPosts } from '../../hooks/useGetUserPosts';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Modal } from 'flowbite-react';
+import { createChatIfNotExists } from '../../services/chat';
 
 function Profile() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { user } = useGetUser(id);
+  const navigate = useNavigate();
   const { posts } = useGetUserPosts(id);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  const userAuthenticated = JSON.parse(localStorage.getItem('user'));
+
+  const handleCreateChat = async () => {
+    try {
+      await createChatIfNotExists(userAuthenticated.id, id);
+      navigate(`/chats/`);
+    } catch (error) {
+      console.error("Error al crear o verificar el chat:", error);
+    }
+  };
+
   return (
     <>
-      {user === undefined ? (
+      {posts == [] ? (
         <h2>{t('loading')}</h2>
       ) : (
         <section className='profile-page flex flex-wrap align-top content-around w-auto px-0 mx-0 lg:justify-center'>
@@ -27,7 +39,7 @@ function Profile() {
             <div className='my-2 w-1/4 px-0 flex flex-col items-center'>
               <img
                 className='h-auto w-20 rounded-full m-auto shadow shadow-pink-300'
-                src={'/img/users/' + user.picture}
+                src={user.avatar}
                 alt={user.name}
               />
               <button
@@ -50,32 +62,34 @@ function Profile() {
               <div className='flex w-full text-left pl-5 mb-3'>
                 <div className='w-10/12'>
                   <h2 className='text-xl font-bold text-custom-350'>
-                    {user.name} {user.lastname}
+                    {user.name} {user.lastName}
                   </h2>
-                  <h5 className='text-sm text-custom-250'>@{user.username}</h5>
+                  <h5 className='text-sm text-custom-250'>@{user.account}</h5>
                 </div>
                 <div className='w-2/12'>
+
                   <button
-                    className='w-full py-2 bg-white text-white font-bold rounded-tr-lg'
-                    type='button'
-                    onClick={() => setIsModalOpen(true)}
+                  className='w-full py-2 bg-white text-white font-bold rounded-tr-lg'
+                  type='button'
+                  onClick={() => setIsModalOpen(true)}
                   >
-                    <svg
-                      className='w-[35px]'
-                      xmlns='http://www.w3.org/2000/svg'
-                      viewBox='0 0 24 24'
-                    >
-                      <title>dots-horizontal</title>
-                      <path
-                        fill='#ff585d'
-                        d='M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z'
-                      />
-                    </svg>
-                  </button>
+                  <svg
+                    className='w-[35px]'
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                  >
+                    <title>dots-horizontal</title>
+                    <path
+                      fill='#ff585d'
+                      d='M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z'
+                    />
+                  </svg>
+                </button>
+
                 </div>
               </div>
               <div className='flex w-full text-left pl-5'>
-                <p className='text-sm text-custom-250 text-justify'>{user.about}</p>
+                <p className='text-sm text-custom-250 text-justify'>{user.description}</p>
               </div>
             </div>
           </section>
@@ -117,9 +131,8 @@ function Profile() {
               <div key={post.id} className='aspect-square'>
                 <img
                   className='object-cover h-full w-full rounded-2xl'
-                  src={post.picture}
-                  //src={post.pictures?.[0]?.url || 'default.jpg'}
-                  alt={post.name}
+                  src={post.pet.imageUrl}
+                  alt={post.title}
                 />
               </div>
             ))}
@@ -151,6 +164,7 @@ function Profile() {
                   </button>
                 </div>
                 <ul className='w-full'>
+                {userAuthenticated.id === user.id && (
                   <li className='w-full py-2 border-b border-b-white flex items-center justify-center'>
                     <Link
                       to={`/settings`}
@@ -166,6 +180,39 @@ function Profile() {
                       <span>{t("edit")}</span>
                     </Link>
                   </li>
+                )}
+                {userAuthenticated.id === user.id && (
+                  <li className='w-full py-2 border-b border-b-white flex items-center justify-center'>
+                    <Link
+                      to={`/chats`}
+                      onClick={closeModal}
+                      className='flex items-center justify-center w-full text-white'
+                    >
+                      <svg className="w-[20px] h-[20px] mr-2 text-white" xmlns="http://www.w3.org/2000/svg"
+                           viewBox="0 0 24 24">
+                        <title>account-cancel</title>
+                        <path fill="currentColor"
+                              d="M17,3H14V5H17V21H7V5H10V3H7A2,2 0 0,0 5,5V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V5A2,2 0 0,0 17,3M12,7A2,2 0 0,1 14,9A2,2 0 0,1 12,11A2,2 0 0,1 10,9A2,2 0 0,1 12,7M16,15H8V14C8,12.67 10.67,12 12,12C13.33,12 16,12.67 16,14V15M16,18H8V17H16V18M12,20H8V19H12V20M13,5H11V1H13V5Z"/>
+                      </svg>
+                      <span>{t("myMessage")}</span>
+                    </Link>
+                  </li>
+                )}
+
+                {userAuthenticated.id !== user.id && (
+                <li className='w-full py-2 border-b border-b-white flex items-center justify-center'>
+                  <button
+                    onClick={handleCreateChat}
+                    className='flex items-center justify-center w-full text-white'
+                  >
+                    <svg className="w-[20px] h-[20px] mr-2 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <title>account-cancel</title>
+                      <path fill="currentColor" d="M17,3H14V5H17V21H7V5H10V3H7A2,2 0 0,0 5,5V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V5A2,2 0 0,0 17,3M12,7A2,2 0 0,1 14,9A2,2 0 0,1 12,11A2,2 0 0,1 10,9A2,2 0 0,1 12,7M16,15H8V14C8,12.67 10.67,12 12,12C13.33,12 16,12.67 16,14V15M16,18H8V17H16V18M12,20H8V19H12V20M13,5H11V1H13V5Z" />
+                    </svg>
+                    <span>{t("sharedMessage")}</span>
+                  </button>
+                </li>)}
+
                   <li className='w-full text-white py-2 border-b border-b-white flex items-center justify-center'>
                     <svg
                       className='w-[20px] h-[20px] mr-2 text-white'

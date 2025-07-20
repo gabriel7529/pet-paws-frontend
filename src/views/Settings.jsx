@@ -48,7 +48,7 @@ const Settings = () => {
       case 'settings.support.faqs':
         return <Faq />;
       case 'settings.manage.logout':
-        return <Logout />;
+        return <Logout/>;
       case 'settings.manage.deleteAccount':
         return <DeleteAccount />;
       default:
