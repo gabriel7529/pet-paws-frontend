@@ -153,7 +153,7 @@ function Profile() {
                 <ul className='w-full'>
                   <li className='w-full py-2 border-b border-b-white flex items-center justify-center'>
                     <Link
-                      to={`/user/edit/${user.id}`}
+                      to={`/settings`}
                       onClick={closeModal}
                       className='flex items-center justify-center w-full text-white'
                     >
