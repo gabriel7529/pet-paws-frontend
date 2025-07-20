@@ -1,4 +1,5 @@
-const BASE_URL = `${import.meta.env.VITE_BASE_URL}/`;
+const BASE_SERVER = import.meta.env.VITE_BASE_URL;
+const BASE_URL = `${BASE_SERVER}/`;
 
 const getAuthHeaders = () => ({
   'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ export async function fetchUser(id) {
 }
 
 export async function fetchUserByEmail(email) {
-  const response = await fetch(`${BASE_URL}/api/users/email/${email}`);
+  const response = await fetch(`${userUrl}email/${email}`);
   return response.json();
 }
 

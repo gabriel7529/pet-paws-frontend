@@ -14,8 +14,6 @@ const stateMap = {
   'Adoptado': 'ADOPTED',
 };
 
-
-
 /*
 const petAgeMap = {
   'Cachorro': 'PUPPY',
@@ -51,22 +49,21 @@ export function formatPostData(postData) {
     ? `Se adopta ${petData.pet_name} mi ${getPetTypeKeyByValue(petData.type)}`
     : '';
     const formattedTags = Array.isArray(tags) ? tags.join(', ') : '';
-
     console.log(updatedState);
+    const idUsuario = JSON.parse(localStorage.getItem('user'));
     return {
       ...rest,
-      title,
+      title: title,
       tags: formattedTags,
-      state,
-      userId: postData.userId,
+      state: updatedState,
+      userId: idUsuario.id,
       petData: {
         ...petData,
         state: updatedState,
       },
       sightingData: {
-        ...sightingData, 
-        latitude: location?.lat ?? 0,
-        longitude: location?.lng ?? 0,
+        ...sightingData,
+
       }
     };
 }

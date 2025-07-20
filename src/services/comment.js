@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:3000/";
+const BASE_SERVER = import.meta.env.VITE_BASE_URL;
+const BASE_URL = `${BASE_SERVER}/`;
 
 export async function fetchCommentsByPost(postId) {
   const token = localStorage.getItem('token');
@@ -15,7 +16,6 @@ export async function fetchCommentsByPost(postId) {
 
   return response.json();
 }
-
 
 export async function createComment(commentData) {
   const token = localStorage.getItem('token');
